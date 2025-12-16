@@ -106,7 +106,7 @@ class CSPRepLayer(nn.Module):
         return self.conv3(x_1 + x_2)
 
 
-# transformer
+             
 class TransformerEncoderLayer(nn.Module):
     def __init__(self,
                  d_model,
@@ -203,7 +203,7 @@ class HybridEncoder(nn.Module):
         self.out_channels = [hidden_dim for _ in range(len(in_channels))]
         self.out_strides = feat_strides
         
-        # channel projection
+                            
         self.input_proj = nn.ModuleList()
         for in_channel in in_channels:
             if version == 'v1':
@@ -220,7 +220,7 @@ class HybridEncoder(nn.Module):
                 
             self.input_proj.append(proj)
 
-        # encoder transformer
+                             
         encoder_layer = TransformerEncoderLayer(
             hidden_dim, 
             nhead=nhead,
@@ -232,7 +232,7 @@ class HybridEncoder(nn.Module):
             TransformerEncoder(copy.deepcopy(encoder_layer), num_encoder_layers) for _ in range(len(use_encoder_idx))
         ])
 
-        # top-down fpn
+                      
         self.lateral_convs = nn.ModuleList()
         self.fpn_blocks = nn.ModuleList()
         for _ in range(len(in_channels) - 1, 0, -1):
@@ -241,7 +241,7 @@ class HybridEncoder(nn.Module):
                 CSPRepLayer(hidden_dim * 2, hidden_dim, round(3 * depth_mult), act=act, expansion=expansion)
             )
 
-        # bottom-up pan
+                       
         self.downsample_convs = nn.ModuleList()
         self.pan_blocks = nn.ModuleList()
         for _ in range(len(in_channels) - 1):
@@ -262,7 +262,7 @@ class HybridEncoder(nn.Module):
                     self.eval_spatial_size[1] // stride, self.eval_spatial_size[0] // stride,
                     self.hidden_dim, self.pe_temperature)
                 setattr(self, f'pos_embed{idx}', pos_embed)
-                # self.register_buffer(f'pos_embed{idx}', pos_embed)
+                                                                    
 
     @staticmethod
     def build_2d_sincos_position_embedding(w, h, embed_dim=256, temperature=10000.):
@@ -271,7 +271,7 @@ class HybridEncoder(nn.Module):
         grid_w = torch.arange(int(w), dtype=torch.float32)
         grid_h = torch.arange(int(h), dtype=torch.float32)
         grid_w, grid_h = torch.meshgrid(grid_w, grid_h, indexing='ij')
-        assert embed_dim % 4 == 0, \
+        assert embed_dim % 4 == 0,\
             'Embed dimension must be divisible by 4 for 2D sin-cos position embedding'
         pos_dim = embed_dim // 4
         omega = torch.arange(pos_dim, dtype=torch.float32) / pos_dim
@@ -286,11 +286,11 @@ class HybridEncoder(nn.Module):
         assert len(feats) == len(self.in_channels)
         proj_feats = [self.input_proj[i](feat) for i, feat in enumerate(feats)]
         
-        # encoder
+                 
         if self.num_encoder_layers > 0:
             for i, enc_ind in enumerate(self.use_encoder_idx):
                 h, w = proj_feats[enc_ind].shape[2:]
-                # flatten [B, C, H, W] to [B, HxW, C]
+                                                     
                 src_flatten = proj_feats[enc_ind].flatten(2).permute(0, 2, 1)
                 if self.training or self.eval_spatial_size is None:
                     pos_embed = self.build_2d_sincos_position_embedding(
@@ -301,7 +301,7 @@ class HybridEncoder(nn.Module):
                 memory :torch.Tensor = self.encoder[i](src_flatten, pos_embed=pos_embed)
                 proj_feats[enc_ind] = memory.permute(0, 2, 1).reshape(-1, self.hidden_dim, h, w).contiguous()
 
-        # broadcasting and fusion
+                                 
         inner_outs = [proj_feats[-1]]
         for idx in range(len(self.in_channels) - 1, 0, -1):
             feat_heigh = inner_outs[0]

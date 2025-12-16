@@ -33,8 +33,8 @@ class FrozenBatchNorm2d(nn.Module):
             missing_keys, unexpected_keys, error_msgs)
 
     def forward(self, x):
-        # move reshapes to the beginning
-        # to make it fuser-friendly
+                                        
+                                   
         w = self.weight.reshape(1, -1, 1, 1)
         b = self.bias.reshape(1, -1, 1, 1)
         rv = self.running_var.reshape(1, -1, 1, 1)
@@ -81,7 +81,7 @@ def deformable_attention_core_func_v2(\
     split_shape = [h * w for h, w in value_spatial_shapes]
     value_list = value.permute(0, 2, 3, 1).flatten(0, 1).split(split_shape, dim=-1)
 
-    # sampling_offsets [8, 480, 8, 12, 2]
+                                         
     if method == 'default':
         sampling_grids = 2 * sampling_locations - 1
 
@@ -105,15 +105,15 @@ def deformable_attention_core_func_v2(\
                 align_corners=False)
         
         elif method == 'discrete':
-            # n * m, seq, n, 2
+                              
             sampling_coord = (sampling_grid_l * torch.tensor([[w, h]], device=value.device) + 0.5).to(torch.int64)
 
-            # FIX ME? for rectangle input
+                                         
             sampling_coord = sampling_coord.clamp(0, h - 1) 
             sampling_coord = sampling_coord.reshape(bs * n_head, Len_q * num_points_list[level], 2) 
 
             s_idx = torch.arange(sampling_coord.shape[0], device=value.device).unsqueeze(-1).repeat(1, sampling_coord.shape[1])
-            sampling_value_l: torch.Tensor = value_l[s_idx, :, sampling_coord[..., 1], sampling_coord[..., 0]] # n l c
+            sampling_value_l: torch.Tensor = value_l[s_idx, :, sampling_coord[..., 1], sampling_coord[..., 0]]        
 
             sampling_value_l = sampling_value_l.permute(0, 2, 1).reshape(bs * n_head, c, Len_q, num_points_list[level])
         

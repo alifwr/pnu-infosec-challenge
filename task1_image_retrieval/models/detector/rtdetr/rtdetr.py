@@ -11,7 +11,7 @@ class RTDETR(nn.Module):
     def __init__(self, num_classes=80, backbone_conf=None, encoder_conf=None, decoder_conf=None, weights=None):
         super().__init__()
         
-        # PResNet50 config
+                          
         self.backbone_conf = backbone_conf if backbone_conf is not None else {
             'depth': 50, 
             'variant': 'd', 
@@ -22,7 +22,7 @@ class RTDETR(nn.Module):
             'pretrained': False
         }
         
-        # HybridEncoder config
+                              
         self.encoder_conf = encoder_conf if encoder_conf is not None else {
             'in_channels': [512, 1024, 2048],
             'feat_strides': [8, 16, 32],
@@ -33,7 +33,7 @@ class RTDETR(nn.Module):
             'depth_mult': 1.0
         }
         
-        # RTDETRTransformerv2 config
+                                    
         self.decoder_conf = decoder_conf if decoder_conf is not None else {
             'hidden_dim': 256,
             'feat_channels': [256, 256, 256],
@@ -50,7 +50,7 @@ class RTDETR(nn.Module):
             'decoder': self.decoder_conf
         }
 
-        # Submodules
+                    
         self.backbone = PResNet(**self.backbone_conf)
         self.encoder = HybridEncoder(**self.encoder_conf)
         self.decoder = RTDETRTransformerv2(num_classes=num_classes, **self.decoder_conf)
@@ -72,7 +72,7 @@ class RTDETR(nn.Module):
         else:
             state_dict = checkpoint
             
-        # load_state_dict returns _IncompatibleKeys
+                                                   
         msg = self.load_state_dict(state_dict, strict=False)
         print("Load status:", msg)
         
@@ -95,7 +95,7 @@ if __name__ == '__main__':
     import torch
     import os
     
-    # Example custom configurations
+                                   
     custom_backbone_conf = {
         'depth': 34, 
         'freeze_at': -1,
@@ -138,7 +138,7 @@ if __name__ == '__main__':
         'eval_spatial_size': [640, 640]
     }
     
-    # Instantiate model with custom config and weights
+                                                      
     print("Instantiating model with custom backbone, encoder, decoder configs and loading weights...")
     model = RTDETR(
         num_classes=80, 
@@ -153,14 +153,14 @@ if __name__ == '__main__':
     import pprint
     pprint.pprint(model.config)
     
-    # Dummy input [B, 3, H, W]
+                              
     x = torch.randn(2, 3, 640, 640)
     
-    # Dummy targets (required for training with denoising)
+                                                          
     targets = [
         {
             'labels': torch.tensor([1, 2], dtype=torch.long), 
-            'boxes': torch.rand(2, 4) # cx, cy, w, h
+            'boxes': torch.rand(2, 4)               
         } 
         for _ in range(2)
     ]
@@ -170,6 +170,6 @@ if __name__ == '__main__':
     
     print("\nOutput keys:", output.keys())
     if 'pred_logits' in output:
-        print("pred_logits:", output['pred_logits'].shape) # [B, num_queries, num_classes]
+        print("pred_logits:", output['pred_logits'].shape)                                
     if 'pred_boxes' in output:
-        print("pred_boxes:", output['pred_boxes'].shape)   # [B, num_queries, 4]
+        print("pred_boxes:", output['pred_boxes'].shape)                        
