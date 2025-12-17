@@ -74,12 +74,12 @@ class RTDETR(nn.Module):
         if weights is not None:
             self.load_weights(weights, load_components)
 
-    def load_weights(self, weights, components=None):
-        if not os.path.exists(weights):
-            raise FileNotFoundError(f"Weights file not found: {weights}")
+    def load_weights(self, weights_path, components=None):
+        if not os.path.exists(weights_path):
+            raise FileNotFoundError(f"Weights file not found: {weights_path}")
 
-        print(f"Loading weights from {weights}...")
-        checkpoint = torch.load(weights, map_location="cpu")
+        print(f"Loading weights from {weights_path}...")
+        checkpoint = torch.load(weights_path, map_location="cpu")
 
         if "model" in checkpoint:
             state_dict = checkpoint["model"]
@@ -155,7 +155,6 @@ if __name__ == "__main__":
         "dim_feedforward": 1024,
         "dropout": 0.1,
         "enc_act": "gelu",
-        "expansion": 0.5,
         "depth_mult": 1.0,
         "act": "silu",
     }
@@ -181,7 +180,7 @@ if __name__ == "__main__":
         "Instantiating model with custom backbone, encoder, decoder configs and loading weights..."
     )
     model = RTDETR(
-        num_classes=5,
+        num_classes=1,
         backbone_conf=custom_backbone_conf,
         encoder_conf=custom_encoder_conf,
         decoder_conf=custom_decoder_conf,
@@ -203,11 +202,12 @@ if __name__ == "__main__":
     x = torch.randn(2, 3, 640, 640)
 
     targets = [
-        {"labels": torch.tensor([1, 2], dtype=torch.long), "boxes": torch.rand(2, 4)}
+        {"labels": torch.tensor([0, 0], dtype=torch.long), "boxes": torch.rand(2, 4)}
         for _ in range(2)
     ]
 
     print("\nRunning forward pass...")
+    # model.eval()
     output = model(x, targets)
 
     print("\nOutput keys:", output.keys())
