@@ -280,7 +280,7 @@ class TransformerDecoder(nn.Module):
         return torch.stack(dec_out_bboxes), torch.stack(dec_out_logits)
 
 
-class RTDETRTransformerv2(nn.Module):
+class RTDETRTransformer(nn.Module):
     __share__ = ['num_classes', 'eval_spatial_size']
 
     def __init__(self,
