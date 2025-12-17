@@ -7,7 +7,7 @@ from PIL import Image
 
 from models.detector.rtdetr.rtdetr import RTDETR
 
-# COCO Class Names (80 classes)
+                               
 CLASSES = [
     'person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat', 'traffic light',
     'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow',
@@ -19,7 +19,7 @@ CLASSES = [
     'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush'
 ]
 
-# Model Configuration (Same as usage example)
+                                             
 def get_model():
     custom_backbone_conf = {
         'depth': 34, 
@@ -88,16 +88,16 @@ def box_cxcywh_to_xyxy(x):
     return torch.stack(b, dim=-1)
 
 def plot_one_box(x, img, color=None, label=None, line_thickness=3):
-    # Plots one bounding box on image img
-    tl = line_thickness or round(0.002 * (img.shape[0] + img.shape[1]) / 2) + 1  # line/font thickness
+                                         
+    tl = line_thickness or round(0.002 * (img.shape[0] + img.shape[1]) / 2) + 1                       
     color = color or [0, 0, 255]
     c1, c2 = (int(x[0]), int(x[1])), (int(x[2]), int(x[3]))
     cv2.rectangle(img, c1, c2, color, thickness=tl, lineType=cv2.LINE_AA)
     if label:
-        tf = max(tl - 1, 1)  # font thickness
+        tf = max(tl - 1, 1)                  
         t_size = cv2.getTextSize(label, 0, fontScale=tl / 3, thickness=tf)[0]
         c2 = c1[0] + t_size[0], c1[1] - t_size[1] - 3
-        cv2.rectangle(img, c1, c2, color, -1, cv2.LINE_AA)  # filled
+        cv2.rectangle(img, c1, c2, color, -1, cv2.LINE_AA)          
         cv2.putText(img, label, (c1[0], c1[1] - 2), 0, tl / 3, [225, 255, 255], thickness=tf, lineType=cv2.LINE_AA)
 
 def main():
@@ -125,9 +125,9 @@ def main():
     transform = T.Compose([
         T.Resize((640, 640)),
         T.ToTensor(),
-        # T.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]) 
-        # Note: RT-DETR might expect different normalization or none, checking utils? 
-        # Defaulting to no normalization for now, just 0-1
+                                                                    
+                                                                                      
+                                                          
     ])
 
     frame_count = 0
@@ -141,16 +141,16 @@ def main():
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         pil_img = Image.fromarray(frame_rgb)
         
-        # Preprocess
+                    
         img = transform(pil_img).unsqueeze(0).to(device)
         
-        # Inference
+                   
         with torch.no_grad():
             output = model(img)
             
-        # Postprocess
-        logits = output['pred_logits'] # [1, 300, 80]
-        boxes = output['pred_boxes']   # [1, 300, 4]
+                     
+        logits = output['pred_logits']               
+        boxes = output['pred_boxes']                
         
         prob = logits.sigmoid()
         topk_values, topk_indexes = torch.topk(prob.view(1, -1), 100, dim=1)
@@ -161,10 +161,10 @@ def main():
         boxes = box_cxcywh_to_xyxy(boxes)
         boxes = boxes[0, topk_boxes[0]]
         
-        # Rescale boxes to original image size
+                                              
         scaled_boxes = rescale_bboxes(boxes.cpu(), (width, height))
         
-        # Draw boxes
+                    
         scores = scores.cpu()
         labels = labels.cpu()
         keep = scores > 0.5
