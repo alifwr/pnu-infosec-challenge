@@ -4,7 +4,7 @@ import os
 
 from .presnet import PResNet
 from .hybrid_encoder import HybridEncoder
-from .rtdetrv2_decoder import RTDETRTransformerv2
+from .rtdetr_decoder import RTDETRTransformer
 
 
 class RTDETR(nn.Module):

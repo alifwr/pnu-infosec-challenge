@@ -1,0 +1,31 @@
+{
+  "output_dir": "scraped_dataset",
+  "queries": [
+    "mobil pick up jalan",
+    "bus di jalan",
+    "mobil sedan di jalan",
+    "mobil suv di jalan",
+    "mobil mpv di jalan"
+  ],
+  "images_per_query": 200,
+  "min_width": 640,
+  "min_height": 480,
+  "sources": {
+    "google": false,
+    "bing": true,
+    "duckduckgo": true
+  },
+  "scraping_settings": {
+    "headless": false,
+    "delay_between_downloads": [
+      0.3,
+      0.7
+    ],
+    "delay_between_scrolls": [
+      1.0,
+      2.0
+    ],
+    "max_scrolls": 10,
+    "timeout": 30
+  }
+}
