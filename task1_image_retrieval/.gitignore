@@ -13,6 +13,6 @@ venv/
 .ipynb_checkpoints
 
 # Project specific
-weights/
 *.mp4
 output/
+*.pth
