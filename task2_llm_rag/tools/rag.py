@@ -17,10 +17,10 @@ cve_cwe_data = load_cve_cwe_data()
 personal_data = load_personal_data()
 
 docs = []
-for item in cve_cwe_data:
-    content = item["DESCRIPTION"]
-    document = Document(page_content=content, metadata=item)
-    docs.append(document)
+# for item in cve_cwe_data:
+#     content = item["DESCRIPTION"]
+#     document = Document(page_content=content, metadata=item)
+#     docs.append(document)
 
 for item in personal_data:
     content = f"""
@@ -55,7 +55,7 @@ vector_store.add_documents(docs)
 
 
 @tool
-def retrieve_context(query: str):
+def retrieve_context_tool(query: str):
     """
     Retrieve relevant context from the vector store based on the query.
 
@@ -70,4 +70,4 @@ def retrieve_context(query: str):
         (f"Source: {doc.metadata}\nContent: {doc.page_content}")
         for doc in retrieved_docs
     )
-    return serialized, retrieved_docs
+    return serialized
