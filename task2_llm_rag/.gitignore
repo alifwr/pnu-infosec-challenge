@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables
+.env
+
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# ChromaDB
+chroma_langchain_db/
