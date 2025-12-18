@@ -1,7 +1,11 @@
-from data_loader import load_cve_cwe_data, load_personal_data
+from langchain_ollama import ChatOllama
 
-cve_cwe_data = load_cve_cwe_data()
-personal_data = load_personal_data()
+from tools.rag import retrieve_context
 
-print(cve_cwe_data)
-print(personal_data)
+res = retrieve_context.invoke("hello naruto")
+print("RES: ", res)
+model = ChatOllama(model="qwen3:8b")
+
+result = model.invoke("hello")
+
+print(result)

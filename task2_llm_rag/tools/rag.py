@@ -1,4 +1,4 @@
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_ollama import OllamaEmbeddings
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
 from langchain.tools import tool
@@ -41,9 +41,8 @@ for item in personal_data:
     docs.append(document)
 
 
-embeddings = GoogleGenerativeAIEmbeddings(
-    model="gemini-embedding-001",
-    api_key=os.getenv("GOOGLE_API_KEY"),
+embeddings = OllamaEmbeddings(
+    model="qwen3-embedding:0.6b",
 )
 
 vector_store = Chroma(
@@ -53,13 +52,22 @@ vector_store = Chroma(
 )
 
 vector_store.add_documents(docs)
-vector_store.persist()
-
-# Example queries
-print(vector_store.similarity_search("What is CVE-2024-4655?"))
 
 
-# @tool
-# def retrieve(query: str):
-#     retriever = vector_store.as_retriever()
-#     return retriever.invoke(query)
+@tool
+def retrieve_context(query: str):
+    """
+    Retrieve relevant context from the vector store based on the query.
+
+    Args:
+        query: The search query string.
+
+    Returns:
+        A tuple containing the serialized string of retrieved documents and the list of document objects.
+    """
+    retrieved_docs = vector_store.similarity_search(query)
+    serialized = "\n\n".join(
+        (f"Source: {doc.metadata}\nContent: {doc.page_content}")
+        for doc in retrieved_docs
+    )
+    return serialized, retrieved_docs
