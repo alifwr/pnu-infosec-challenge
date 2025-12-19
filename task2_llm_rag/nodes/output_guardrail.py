@@ -4,7 +4,7 @@ import json
 import re
 
 from langgraph.graph import MessagesState
-from langchain_core.messages import SystemMessage, AIMessage
+from langchain_core.messages import SystemMessage, AIMessage, HumanMessage
 from pydantic import BaseModel, Field
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -21,7 +21,7 @@ class GuardrailResult(BaseModel):
     )
 
 
-def check_request_safety(state: MessagesState):
+def check_response_safety(state: MessagesState):
     last_message = state["messages"][-1]
     system_prompt = SystemMessage(
         content="""You are a guardrail agent responsible for validating the output generation.
@@ -38,17 +38,28 @@ Output ONLY the JSON object.
     response = model.invoke([system_prompt] + [last_message])
     content = response.content
 
+    is_safe = False
     match = re.search(r"\{.*\}", content, re.DOTALL)
     if match:
         json_str = match.group(0)
         try:
             data = json.loads(json_str)
-            return {"is_output_safe": data.get("is_output_safe", False)}
+            is_safe = data.get("is_output_safe", False)
         except json.JSONDecodeError:
             pass
 
-    return {"is_output_safe": False}
+    if not is_safe:
+        return {
+            "is_output_safe": False,
+            "messages": [
+                HumanMessage(
+                    content="The generated response contained PII. Please regenerate the response removing any personal identifiable information."
+                )
+            ],
+        }
+
+    return {"is_output_safe": True}
 
 
 if __name__ == "__main__":
-    print(check_request_safety(MessagesState(messages=[AIMessage(content="Hello")])))
+    print(check_response_safety(MessagesState(messages=[AIMessage(content="Hello")])))
