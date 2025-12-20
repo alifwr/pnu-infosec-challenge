@@ -1,5 +1,5 @@
 {
-  "output_dir": "scraped_dataset",
+  "output_dir": "dataset",
   "queries": [
     "mobil pick up jalan",
     "bus di jalan",

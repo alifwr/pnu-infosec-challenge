@@ -1,0 +1,81 @@
+{
+    "out_channels": 1280,
+    "num_class": 100,
+    "dropout": 0.2,
+    "stochastic_depth": 0.0,
+    "block": "MBConv",
+    "act_layer": "nn.SiLU",
+    "norm_layer": "nn.BatchNorm2d",
+    "layer_infos": [
+        {
+            "expand_ratio": 1,
+            "kernel": 3,
+            "stride": 1,
+            "in_ch": 24,
+            "out_ch": 24,
+            "num_layers": 3,
+            "se": false,
+            "fused": true
+        },
+        {
+            "expand_ratio": 4,
+            "kernel": 3,
+            "stride": 2,
+            "in_ch": 24,
+            "out_ch": 48,
+            "num_layers": 5,
+            "se": false,
+            "fused": true
+        },
+        {
+            "expand_ratio": 4,
+            "kernel": 3,
+            "stride": 2,
+            "in_ch": 48,
+            "out_ch": 80,
+            "num_layers": 5,
+            "se": false,
+            "fused": true
+        },
+        {
+            "expand_ratio": 4,
+            "kernel": 3,
+            "stride": 2,
+            "in_ch": 80,
+            "out_ch": 160,
+            "num_layers": 7,
+            "se": true,
+            "fused": false
+        },
+        {
+            "expand_ratio": 6,
+            "kernel": 3,
+            "stride": 1,
+            "in_ch": 160,
+            "out_ch": 176,
+            "num_layers": 14,
+            "se": true,
+            "fused": false
+        },
+        {
+            "expand_ratio": 6,
+            "kernel": 3,
+            "stride": 2,
+            "in_ch": 176,
+            "out_ch": 304,
+            "num_layers": 18,
+            "se": true,
+            "fused": false
+        },
+        {
+            "expand_ratio": 6,
+            "kernel": 3,
+            "stride": 1,
+            "in_ch": 304,
+            "out_ch": 512,
+            "num_layers": 5,
+            "se": true,
+            "fused": false
+        }
+    ]
+}

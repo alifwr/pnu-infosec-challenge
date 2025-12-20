@@ -5,10 +5,11 @@ import warnings
 import torch
 import torch.nn as nn
 
+
 class DropPath(nn.Module):
-    """Drop paths (Stochastic Depth) per sample  (when applied in main path of residual blocks).
-    """
-    def __init__(self, drop_prob: float = 0., scale_by_keep: bool = True):
+    """Drop paths (Stochastic Depth) per sample  (when applied in main path of residual blocks)."""
+
+    def __init__(self, drop_prob: float = 0.0, scale_by_keep: bool = True):
         super().__init__()
         self.drop_prob = drop_prob
         self.scale_by_keep = scale_by_keep
@@ -17,9 +18,12 @@ class DropPath(nn.Module):
         return drop_path(x, self.drop_prob, self.training, self.scale_by_keep)
 
     def extra_repr(self):
-        return f'drop_prob={round(self.drop_prob,3):0.3f}'
+        return f"drop_prob={round(self.drop_prob, 3):0.3f}"
 
-def drop_path(x, drop_prob: float = 0., training: bool = False, scale_by_keep: bool = True):
+
+def drop_path(
+    x, drop_prob: float = 0.0, training: bool = False, scale_by_keep: bool = True
+):
     """Drop paths (Stochastic Depth) per sample (when applied in main path of residual blocks).
 
     This is the same as the DropConnect impl I created for EfficientNet, etc networks, however,
@@ -29,22 +33,23 @@ def drop_path(x, drop_prob: float = 0., training: bool = False, scale_by_keep: b
     'survival rate' as the argument.
 
     """
-    if drop_prob == 0. or not training:
+    if drop_prob == 0.0 or not training:
         return x
     keep_prob = 1 - drop_prob
-    shape = (x.shape[0],) + (1,) * (x.ndim - 1)                                                    
+    shape = (x.shape[0],) + (1,) * (x.ndim - 1)
     random_tensor = x.new_empty(shape).bernoulli_(keep_prob)
     if keep_prob > 0.0 and scale_by_keep:
         random_tensor.div_(keep_prob)
     return x * random_tensor
+
 
 def to_2tuple(x):
     if isinstance(x, collections.abc.Iterable) and not isinstance(x, str):
         return tuple(x)
     return tuple(repeat(x, 2))
 
-def trunc_normal_(tensor, mean=0., std=1., a=-2., b=2.):
-                                                          
+
+def trunc_normal_(tensor, mean=0.0, std=1.0, a=-2.0, b=2.0):
     r"""Fills the input Tensor with values drawn from a truncated
     normal distribution. The values are effectively drawn from the
     normal distribution :math:`\mathcal{N}(\text{mean}, \text{std}^2)`
@@ -69,36 +74,63 @@ def trunc_normal_(tensor, mean=0., std=1., a=-2., b=2.):
     with torch.no_grad():
         return _trunc_normal_(tensor, mean, std, a, b)
 
+
 def _trunc_normal_(tensor, mean, std, a, b):
-                                                                                         
-                                                                                             
     def norm_cdf(x):
-                                                                   
-        return (1. + math.erf(x / math.sqrt(2.))) / 2.
+        return (1.0 + math.erf(x / math.sqrt(2.0))) / 2.0
 
     if (mean < a - 2 * std) or (mean > b + 2 * std):
-        warnings.warn("mean is more than 2 std from [a, b] in nn.init.trunc_normal_. "
-                      "The distribution of values may be incorrect.",
-                      stacklevel=2)
+        warnings.warn(
+            "mean is more than 2 std from [a, b] in nn.init.trunc_normal_. "
+            "The distribution of values may be incorrect.",
+            stacklevel=2,
+        )
 
-                                                                        
-                                                             
-                                    
-    l = norm_cdf((a - mean) / std)
-    u = norm_cdf((b - mean) / std)
+    lower = norm_cdf((a - mean) / std)
+    upper = norm_cdf((b - mean) / std)
 
-                                                                      
-                   
-    tensor.uniform_(2 * l - 1, 2 * u - 1)
+    tensor.uniform_(2 * lower - 1, 2 * upper - 1)
 
-                                                                        
-                     
     tensor.erfinv_()
 
-                                   
-    tensor.mul_(std * math.sqrt(2.))
+    tensor.mul_(std * math.sqrt(2.0))
     tensor.add_(mean)
 
-                                              
     tensor.clamp_(min=a, max=b)
     return tensor
+
+
+def window_partition(x, window_size):
+    """
+    Args:
+        x: (B, H, W, C)
+        window_size (int): window size
+
+    Returns:
+        windows: (num_windows*B, window_size, window_size, C)
+    """
+    B, H, W, C = x.shape
+    x = x.view(B, H // window_size, window_size, W // window_size, window_size, C)
+    windows = (
+        x.permute(0, 1, 3, 2, 4, 5).contiguous().view(-1, window_size, window_size, C)
+    )
+    return windows
+
+
+def window_reverse(windows, window_size, H, W):
+    """
+    Args:
+        windows: (num_windows*B, window_size, window_size, C)
+        window_size (int): Window size
+        H (int): Height of image
+        W (int): Width of image
+
+    Returns:
+        x: (B, H, W, C)
+    """
+    B = int(windows.shape[0] / (H * W / window_size / window_size))
+    x = windows.view(
+        B, H // window_size, W // window_size, window_size, window_size, -1
+    )
+    x = x.permute(0, 1, 3, 2, 4, 5).contiguous().view(B, H, W, -1)
+    return x
