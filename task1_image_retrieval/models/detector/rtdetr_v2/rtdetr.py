@@ -7,7 +7,7 @@ from .hybrid_encoder import HybridEncoder
 from .rtdetr_decoder import RTDETRTransformer
 
 
-class RTDETR(nn.Module):
+class RTDETRV2(nn.Module):
     def __init__(
         self,
         num_classes=80,
@@ -179,7 +179,7 @@ if __name__ == "__main__":
     print(
         "Instantiating model with custom backbone, encoder, decoder configs and loading weights..."
     )
-    model = RTDETR(
+    model = RTDETRV2(
         num_classes=1,
         backbone_conf=custom_backbone_conf,
         encoder_conf=custom_encoder_conf,
