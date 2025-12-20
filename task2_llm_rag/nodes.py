@@ -1,4 +1,10 @@
-from langchain_core.messages import SystemMessage, HumanMessage, ToolMessage, AIMessage
+from langchain_core.messages import (
+    SystemMessage,
+    HumanMessage,
+    ToolMessage,
+    AIMessage,
+    RemoveMessage,
+)
 import re
 import json
 
@@ -71,9 +77,10 @@ Output ONLY the JSON object.
         return {
             "is_output_safe": False,
             "messages": [
-                HumanMessage(
+                RemoveMessage(id=last_message.id),
+                SystemMessage(
                     content="The generated response contained PII. Please regenerate the response removing any personal identifiable information."
-                )
+                ),
             ],
         }
 

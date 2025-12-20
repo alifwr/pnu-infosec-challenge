@@ -25,6 +25,7 @@ async def chat(request: ChatRequest):
 
     response_messages = []
     for m in result["messages"]:
+        print(m.type)
         msg_dict = {
             "role": "assistant" if m.type == "ai" else "user",
             "content": str(m.content),
@@ -36,8 +37,6 @@ async def chat(request: ChatRequest):
         elif m.type == "ai":
             if getattr(m, "tool_calls", None):
                 msg_dict["tool_calls"] = m.tool_calls
-
-        print(msg_dict)
 
         response_messages.append(msg_dict)
 
