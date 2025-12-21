@@ -79,6 +79,17 @@ model = load_model(
     weight_path=weights_path,
 ).to(DEVICE)
 
+# Freeze backbone and encoder
+print("Freezing backbone and encoder...")
+for param in model.backbone.parameters():
+    param.requires_grad = False
+for param in model.encoder.parameters():
+    param.requires_grad = False
+
+print("Backbone and Encoder frozen.")
+trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
+print(f"Trainable parameters: {trainable_params:,}")
+
 matcher = HungarianMatcher(cost_class=2.0, cost_bbox=5.0, cost_giou=2.0)
 weight_dict = {"loss_ce": 1, "loss_bbox": 5, "loss_giou": 2}
 losses = ["labels", "boxes", "cardinality"]

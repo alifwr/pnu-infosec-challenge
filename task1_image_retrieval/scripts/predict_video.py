@@ -9,7 +9,7 @@ import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from models.detector.rtdetr.rtdetr import RTDETR
+from models.detector.rtdetr_v2.rtdetr import RTDETRV2
 
 
 CLASSES = ["car", "motorcycle", "airplane", "bus", "train"]
@@ -18,24 +18,25 @@ CLASSES = ["car", "motorcycle", "airplane", "bus", "train"]
 def get_model(config_path=None):
     if config_path is None:
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        config_path = os.path.join(base_dir, "configs", "rtdetr_config.json")
+        config_path = os.path.join(base_dir, "configs", "rtdetr_v2.json")
 
     print(f"Loading model configuration from {config_path}")
     with open(config_path, "r") as f:
         config = json.load(f)
 
     weights_path = config.get(
-        "weights_path", "weights/rtdetrv2_r34vd_120e_coco_ema.pth"
+        "weights_path", None
     )
+    print("Weight Path: ", weights_path)
 
     print("Initializing model...")
-    model = RTDETR(
-        num_classes=5,
+    model = RTDETRV2(
+        num_classes=1,
         backbone_conf=config["backbone_conf"],
         encoder_conf=config["encoder_conf"],
         decoder_conf=config["decoder_conf"],
         weights=weights_path,
-        load_components=["backbone", "encoder"],
+        # load_components=["backbone", "encoder"],
     )
     model.eval()
     return model
@@ -126,8 +127,9 @@ def main():
         prob = logits.sigmoid()
         topk_values, topk_indexes = torch.topk(prob.view(1, -1), 100, dim=1)
         scores = topk_values[0]
-        topk_boxes = topk_indexes // 80
-        labels = topk_indexes % 80
+        num_classes = logits.shape[-1]
+        topk_boxes = topk_indexes // num_classes
+        labels = topk_indexes % num_classes
 
         boxes = box_cxcywh_to_xyxy(boxes)
         boxes = boxes[0, topk_boxes[0]]
@@ -141,8 +143,6 @@ def main():
         for box, score, label_idx in zip(
             scaled_boxes[keep], scores[keep], labels[0][keep]
         ):
-            if label_idx != 2:
-                continue
             label = f"{CLASSES[label_idx]}: {score:.2f}"
             plot_one_box(box.tolist(), frame, label=label, color=[0, 255, 0])
 

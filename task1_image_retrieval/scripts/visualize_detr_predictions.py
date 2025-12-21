@@ -15,7 +15,7 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 IMAGE_SIZE = 640
 CONF_THRESHOLD = 0.45
 NUM_SAMPLES = 5
-WEIGHTS_PATH = "weights/rtdetrv2_r34vd_120e_coco_ema.pth"
+WEIGHTS_PATH = "rtdetr_custom.pth"
 TEST_IMG_DIR = "./dataset/indonesia_vehicle/test/images"
 OUTPUT_DIR = "./predictions_detr"
 
@@ -28,7 +28,6 @@ def load_trained_model():
         print(
             f"Warning: Custom weights {WEIGHTS_PATH} not found. Using pretrained weights if available in config or None."
         )
-        weights = "weights/rtdetrv2_r34vd_120e_coco_ema.pth"  # Fallback to base
     else:
         weights = WEIGHTS_PATH
         print(f"Loading weights from {weights}")
