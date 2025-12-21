@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn as nn
 
@@ -9,7 +10,7 @@ from .head import Detect
 
 
 class YOLO11(nn.Module):
-    def __init__(self, nc=80, scale="n"):
+    def __init__(self, nc=80, scale="n", weights=None, load_components=None):
         super().__init__()
         self.nc = nc
 
@@ -88,6 +89,9 @@ class YOLO11(nn.Module):
         # 23: Detect
         self.detect = Detect(nc, ch=(c(256), c(512), c(1024)))
 
+        if weights is not None:
+            self.load_weights(weights, load_components)
+
     def forward(self, x):
         # Backbone
         x0 = self.b0(x)
@@ -119,24 +123,28 @@ class YOLO11(nn.Module):
         h21 = torch.cat([h20, x10], dim=1)
         h22 = self.h22(h21)  # P5
 
-        # Detect
         return self.detect([h16, h19, h22])
 
-    def load_weights(self, weights_path):
-        """Load weights from a .pth file (state_dict with 'model.i...' keys)."""
-        state_dict = torch.load(weights_path, map_location="cpu")
+    def load_weights(self, weights_path, components=None):
+        if not os.path.exists(weights_path):
+            raise FileNotFoundError(f"Weights file not found: {weights_path}")
 
-        # If wrapped in 'model', extract it. Use state_dict directly if keys start with model.0
-        if "model" in state_dict and not list(state_dict.keys())[0].startswith(
-            "model."
-        ):
-            state_dict = state_dict["model"]
-            if hasattr(state_dict, "state_dict"):
-                state_dict = state_dict.state_dict()
+        print(f"Loading weights from {weights_path}...")
+        checkpoint = torch.load(weights_path, map_location="cpu")
+
+        if "model" in checkpoint:
+            state_dict = checkpoint["model"]
+        elif "ema" in checkpoint and "module" in checkpoint["ema"]:
+            state_dict = checkpoint["ema"]["module"]
+        else:
+            state_dict = checkpoint
 
         new_state_dict = {}
+
+        if components is not None:
+            print(f"Loading only components: {components}")
+
         for k, v in state_dict.items():
-            # key example: model.0.conv.weight
             parts = k.split(".")
             if parts[0] == "model":
                 idx = int(parts[1])
@@ -152,16 +160,22 @@ class YOLO11(nn.Module):
                     print(f"Warning: Unexpected layer index {idx} in {k}")
                     continue
 
-                # Check if this attribute exists in our model
                 if hasattr(self, target_attr):
                     new_key = f"{target_attr}.{rest}"
+
+                    if components is not None:
+                        if not any(
+                            new_key.startswith(c + ".") or new_key == c
+                            for c in components
+                        ):
+                            continue
+
                     new_state_dict[new_key] = v
                 else:
                     pass
             else:
                 pass
 
-        # Load
         missing, unexpected = self.load_state_dict(new_state_dict, strict=False)
         print(f"Weights loaded from {weights_path}")
         if missing:
@@ -171,7 +185,6 @@ class YOLO11(nn.Module):
 
 
 if __name__ == "__main__":
-    # Test loading 'm' model
     model = YOLO11(scale="m")
     print("YOLO11m instantiated.")
     print(model)
