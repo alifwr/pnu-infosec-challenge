@@ -7,7 +7,7 @@
     "mobil suv di jalan",
     "mobil mpv di jalan"
   ],
-  "images_per_query": 200,
+  "images_per_query": 500,
   "min_width": 640,
   "min_height": 480,
   "sources": {
@@ -25,7 +25,7 @@
       1.0,
       2.0
     ],
-    "max_scrolls": 10,
+    "max_scrolls": 20,
     "timeout": 30
   }
 }
