@@ -98,7 +98,7 @@ async def main():
         total_collected += query_total
 
     logger.info(f"\n{'=' * 60}")
-    logger.info(f"SCRAPING COMPLETE!")
+    logger.info("SCRAPING COMPLETE!")
     logger.info(f"{'=' * 60}")
     logger.info(f"Total images collected: {total_collected}")
     logger.info(f"Images saved to: {config['output_dir']}/images/")
