@@ -120,8 +120,13 @@ class ImageScraperBase:
 
             headers = {
                 "User-Agent": random.choice(USER_AGENTS),
-                "Referer": "https://www.google.com/",
                 "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+                "Accept-Language": "en-US,en;q=0.9",
+                "Accept-Encoding": "gzip, deflate, br",
+                "Connection": "keep-alive",
+                "Sec-Fetch-Dest": "image",
+                "Sec-Fetch-Mode": "no-cors",
+                "Sec-Fetch-Site": "cross-site",
             }
 
             response = requests.get(
@@ -283,6 +288,11 @@ class GoogleImageScraper(ImageScraperBase):
             if len(image_urls) < count:
                 try:
                     containers = await page.query_selector_all("div[data-id]")
+                    if containers:
+                        logger.info(
+                            f"Checking {len(containers[:5])} container elements for large images..."
+                        )
+
                     for i, container in enumerate(containers[:5]):
                         try:
                             await container.click(timeout=20000)
@@ -307,19 +317,32 @@ class GoogleImageScraper(ImageScraperBase):
                     pass
 
             if current_height == last_height:
+                logger.info(
+                    "Page height did not change, checking for 'Show more' button..."
+                )
                 try:
                     more_button = await page.query_selector(
                         'input[value="Show more results"]'
                     )
                     if more_button:
+                        logger.info("Found 'Show more results' button, clicking...")
                         await more_button.click()
                         await asyncio.sleep(2)
+                    else:
+                        logger.info("No 'Show more results' button found.")
                 except:
+                    logger.info("Error checking/clicking 'Show more' button.")
                     pass
 
                 scroll_attempts += 1
+                logger.info(
+                    f"Scroll attempt {scroll_attempts}/{max_scrolls} (no height change)"
+                )
             else:
                 scroll_attempts = 0
+                logger.info(
+                    f"Helper: Scrolled down. Current images found: {len(image_urls)}"
+                )
 
             last_height = current_height
 
@@ -329,20 +352,45 @@ class GoogleImageScraper(ImageScraperBase):
     async def scrape(self, query: str, count: int = 100) -> int:
         """Scrape images from Google"""
         async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=True)
+            browser = await p.chromium.launch(
+                headless=False,
+                args=[
+                    "--disable-blink-features=AutomationControlled",
+                    "--no-sandbox",
+                    "--disable-setuid-sandbox",
+                ],
+            )
             context = await browser.new_context(
                 user_agent=self.get_random_user_agent(),
                 viewport={"width": 1920, "height": 1080},
             )
+
+            # Anti-detection script
+            await context.add_init_script("""
+                Object.defineProperty(navigator, 'webdriver', {
+                    get: () => undefined
+                });
+            """)
+
             page = await context.new_page()
 
             try:
                 image_urls = await self.scrape_with_browser(page, query, count)
 
                 downloaded = 0
-                for url in image_urls:
+                total_urls = len(image_urls)
+                logger.info(
+                    f"Starting download of {min(count, total_urls)} images from {total_urls} candidates..."
+                )
+
+                for i, url in enumerate(image_urls, 1):
                     if downloaded >= count:
                         break
+
+                    if i % 5 == 0:
+                        logger.info(
+                            f"Processing candidate {i}/{total_urls} (Downloaded: {downloaded}/{count})"
+                        )
 
                     if self.download_image(url, query, "google"):
                         downloaded += 1
@@ -411,7 +459,7 @@ class BingImageScraper(ImageScraperBase):
     async def scrape(self, query: str, count: int = 100) -> int:
         """Scrape images from Bing"""
         async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=True)
+            browser = await p.chromium.launch(headless=False)
             context = await browser.new_context(
                 user_agent=self.get_random_user_agent(),
                 viewport={"width": 1920, "height": 1080},
@@ -422,9 +470,19 @@ class BingImageScraper(ImageScraperBase):
                 image_urls = await self.scrape_with_browser(page, query, count)
 
                 downloaded = 0
-                for url in image_urls:
+                total_urls = len(image_urls)
+                logger.info(
+                    f"Starting download of {min(count, total_urls)} images from {total_urls} candidates (Bing)..."
+                )
+
+                for i, url in enumerate(image_urls, 1):
                     if downloaded >= count:
                         break
+
+                    if i % 5 == 0:
+                        logger.info(
+                            f"Processing candidate {i}/{total_urls} (Downloaded: {downloaded}/{count})"
+                        )
 
                     if self.download_image(url, query, "bing"):
                         downloaded += 1
@@ -485,7 +543,7 @@ class DuckDuckGoImageScraper(ImageScraperBase):
     async def scrape(self, query: str, count: int = 100) -> int:
         """Scrape images from DuckDuckGo"""
         async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=True)
+            browser = await p.chromium.launch(headless=False)
             context = await browser.new_context(
                 user_agent=self.get_random_user_agent(),
                 viewport={"width": 1920, "height": 1080},
@@ -496,9 +554,19 @@ class DuckDuckGoImageScraper(ImageScraperBase):
                 image_urls = await self.scrape_with_browser(page, query, count)
 
                 downloaded = 0
-                for url in image_urls:
+                total_urls = len(image_urls)
+                logger.info(
+                    f"Starting download of {min(count, total_urls)} images from {total_urls} candidates (DDG)..."
+                )
+
+                for i, url in enumerate(image_urls, 1):
                     if downloaded >= count:
                         break
+
+                    if i % 5 == 0:
+                        logger.info(
+                            f"Processing candidate {i}/{total_urls} (Downloaded: {downloaded}/{count})"
+                        )
 
                     if self.download_image(url, query, "duckduckgo"):
                         downloaded += 1
