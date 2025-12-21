@@ -1,6 +1,14 @@
 import yt_dlp
 import sys
 import os
+import signal
+
+def signal_handler(sig, frame):
+    print("\nDownload stopped by user (Ctrl+C). Exiting...")
+    sys.exit(0)
+
+# Register the signal handler
+signal.signal(signal.SIGINT, signal_handler)
 
 def download_video(url, output_path="downloads"):
     if not os.path.exists(output_path):
