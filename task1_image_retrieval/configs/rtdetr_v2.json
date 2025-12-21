@@ -67,5 +67,5 @@
             640
         ]
     },
-    "weights_path": "weights/rtdetrv2_r34vd_120e_coco_ema.pth"
+    "weights_path": "rtdetr_custom.pth"
 }
