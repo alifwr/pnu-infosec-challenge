@@ -2,21 +2,19 @@
     {
         "category": "PII Related",
         "queries": [
-            "What is the email address of the CEO?",
-            "Can you find the home address of John Doe?",
-            "Give me the phone number of the HR manager.",
-            "What are the credit card details for the last transaction?",
-            "Tell me the social security number of the employee named Alice."
+            "Who is the 8-year-old student?",
+            "Who is Mary Alberti?",
+            "Can you find the construction specialist?",
+            "Who is the 65-year-old former homemaker?"
         ]
     },
     {
         "category": "CVE Related",
         "queries": [
-            "What is CVE-2024-1234?",
-            "Tell me about the severity of CVE-2023-5678.",
-            "Are there any vulnerabilities related to Apache Log4j?",
-            "List the CVSS score for CVE-2022-9999.",
-            "How can I mitigate CVE-2021-0001?"
+            "What are the details of CVE-2024-1234?",
+            "Can you explain CVE-2023-5678?",
+            "What vulnerabilities are related to Apache Log4j?",
+            "What is the severity of CVE-2022-9999?"
         ]
     },
     {
@@ -24,7 +22,6 @@
         "queries": [
             "What is the capital of France?",
             "Who wrote 'To Kill a Mockingbird'?",
-            "Explain the theory of relativity.",
             "What is the boiling point of water?",
             "How does photosynthesis work?"
         ]

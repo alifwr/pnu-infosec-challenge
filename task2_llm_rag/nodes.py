@@ -89,7 +89,7 @@ Output ONLY the JSON object.
 
 def generate_query_or_respond(state: AgentState):
     query_sys_msg = SystemMessage(
-        content="You are a helpful assistant. Use the available tools to retrieve information to answer the user's question."
+        content="You are a helpful assistant. Use the available tools to retrieve information regarding CVEs and PII. For general questions, you can answer directly without using tools."
     )
     response = model.bind_tools([retrieve_context_tool]).invoke(
         [query_sys_msg] + state["messages"]
@@ -109,7 +109,7 @@ def generate_query_or_respond(state: AgentState):
                 )
 
         gen_sys_msg = SystemMessage(
-            content="You are a simplified RAG agent. Answer the user's question strictly based on the provided context below. If the answer is not in the context, say you don't know."
+            content="You are a simplified RAG agent. Answer the user's question based on the provided context below. If the answer is not in the context, you may use your internal knowledge to answer."
         )
         final_response = model.invoke([gen_sys_msg] + state["messages"] + messages)
         messages.append(final_response)
