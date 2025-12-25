@@ -226,11 +226,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
 OUTPUT main.toc
-INPUT ./chapters/01_executive_summary.tex
-INPUT ./chapters/01_executive_summary.tex
-INPUT ./chapters/01_executive_summary.tex
-INPUT ./chapters/01_executive_summary.tex
-INPUT chapters/01_executive_summary.tex
 INPUT ./chapters/02_image_task.tex
 INPUT ./chapters/02_image_task.tex
 INPUT ./chapters/02_image_task.tex

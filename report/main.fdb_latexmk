@@ -1,14 +1,14 @@
 # Fdb version 4
-["biber main"] 0 "main.bcf" "main.bbl" "main" 1766668074.83297 -1
-  "main.bcf" 1766668074.78111 107403 95dba13c70e1334e4cef928b18e6f25d "pdflatex"
+["biber main"] 0 "main.bcf" "main.bbl" "main" 1766678652.35113 -1
+  "main.bcf" 1766678652.29751 107403 95dba13c70e1334e4cef928b18e6f25d "pdflatex"
   "references.bib" 1766640892.38593 1116 3b656fd4f77c1fae9da21730ffad43fc ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1766668072.79696 "/home/alif/pnu/report/main.tex" "main.pdf" "main" 1766668074.83321 0
+["pdflatex"] 1766678650.25747 "/home/alif/pnu/report/main.tex" "main.pdf" "main" 1766678652.35137 0
   "/etc/texmf/web2c/texmf.cnf" 1766015017.74193 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/alif/pnu/report/main.tex" 1766640517.97751 490 ba2764ca96d5072f67c11c58566e5f26 ""
+  "/home/alif/pnu/report/main.tex" 1766668154.90279 492 53a59006d7950432199e1312e7f4092b ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm" 1136768653 3584 402da0b29eafbad07963b1224b222f18 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1440.tfm" 1136768653 3584 13049b61b922a28b158a38aeff75ee9b ""
@@ -123,20 +123,19 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1766059583.22169 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1766059662 8212680 2f04877e65e950740ab8abae156f90f2 ""
-  "chapters/01_executive_summary.tex" 1766532587.35192 257 3480de1662b405876e599d34c8838ac1 ""
-  "chapters/02_image_task.tex" 1766643868.48908 3168 ee567faac7d623a13b2c469953841800 ""
+  "chapters/02_image_task.tex" 1766678647.97144 3174 8cc94a78f543fa861556afe6ce19b4da ""
   "chapters/03_llm_rag_task.tex" 1766668072.63 17120 bb2aeea5fa4e622ceceae17332343e4d ""
   "chapters/04_adversarial_bonus.tex" 1766532587.35211 338 cd0ab905d4e57acdebca5b53c5c9be9c ""
   "chapters/05_conclusion.tex" 1766532587.3522 160 d379c2fce0338f70cfffe7496d3a679a ""
   "figures/llm_integration_pipeline.png" 1766645724.33826 950234 7a01f3d45533a4dc42a8884220f326b1 ""
   "figures/rag_pipeline.png" 1766644949.67366 911155 228788709d4f196fe35009242bb5e8ff ""
   "figures/rt-detr.png" 1766642118.13153 168154 6e058b79bbe8bacd75a90906819784fe ""
-  "main.aux" 1766668074.78014 7233 d7be3cb087b52af442b796014494c488 "pdflatex"
+  "main.aux" 1766678652.29651 7133 a6363c1786e6dd31a2db6e5c07c77ecf "pdflatex"
   "main.bbl" 1766641331.07128 7159 afc22fb6e7640e56d669301d680f7646 "biber main"
-  "main.out" 1766668074.78014 3964 ce90b5469b66ecdd6c1efff9a3d6a253 "pdflatex"
-  "main.run.xml" 1766668074.78214 2402 7c866ed2192e71c57464ed4279aadefa "pdflatex"
-  "main.tex" 1766640517.97751 490 ba2764ca96d5072f67c11c58566e5f26 ""
-  "main.toc" 1766668074.78214 2613 c95c85570d56c22a6d145462e7958cdf "pdflatex"
+  "main.out" 1766678652.29751 3864 aac513a79934800fd36e0333698c9f15 "pdflatex"
+  "main.run.xml" 1766678652.29922 2402 7c866ed2192e71c57464ed4279aadefa "pdflatex"
+  "main.tex" 1766668154.90279 492 53a59006d7950432199e1312e7f4092b ""
+  "main.toc" 1766678652.29922 2558 676c4e9ec8adec35b03d4032564e968d "pdflatex"
   "preamble.tex" 1766649614.68408 1432 c4b75eac5e27400788bfb7689c06b5c5 ""
   (generated)
   "main.aux"
