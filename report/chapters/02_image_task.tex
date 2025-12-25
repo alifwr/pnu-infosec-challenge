@@ -1,7 +1,38 @@
 \chapter{Task 1: Computer Vision (Image Task)}
 
-\section{System Architecture}
-Describe the high-level architecture of the image processing pipeline here.
+This chapter described about the Image Task from the Admission Test. The Image Task was divided into two sections, Object Detection and Image Classification. The object detection was used to detect the available vehicle in the image, while the image classification was used to classify the detected vehicle into different types of vehicle.
+
+\section{Object Detection}
+
+To accomplish the object detection task, I compared RT-DETRv2 (Real-Time Detection Transformer version 2) \cite{lv2024rtdetrv2improvedbaselinebagoffreebies} and YOLOv10 (You Only Look Once version 10) \cite{wang2024yolov10} to find which is the most suitable for this task. As mentioned in the challenge, it is required to compare both CNN-based and attention-based models. Hence, RT-DETRv2 was chosen as the attention-based model, while YOLOv10 was chosen as the CNN-based model.
+
+\subsection{RT-DETRv2}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/rt-detr.png}
+    \caption{RT-DETR Architecture}
+    \label{fig:rt-detr}
+\end{figure}
+
+RT-DETRv2 is an upgraded version of Baidu's original RT-DETR \cite{zhao2024detrsbeatyolosrealtime}. It was designed to be a high-performance, end-to-end object detector that maintains real-time speeds while utilizing the global context capabilities of Transformers. In their paper, the authors said that The framework of RT-DETRv2 remains the same as RT-DETR, with only modifications to the deformable attention module of the decoder.
+
+
+
+% Here are several features of RT-DETRv2:
+
+% \begin{itemize}
+%     \item \textbf{NMS-Free:} Same with the previous RT-DETR, RT-DETRv2 does not use Non-Maximum Suppression (NMS) to remove overlapping bounding boxes, which can improve speed and reduce false positives.
+%     \item \textbf{Bag-of-Freebies:} RT-DETRv2 introduces several "Bag-of-Freebies" to enhance flexibility and performance.
+%     \item \textbf{Selective Multi-Scale Sampling:} Unlike the original version that used a uniform number of sampling points across all scales, version 2 RT-DETR allows a distinct number of sampling points for different feature scales. This helps the model focus more effectively on tiny objects versus large ones.
+%     \item \textbf{IoU-aware Query Selection:} RT-DETRv2 uses IoU-aware query selection to improve the model's ability to detect objects of different sizes and aspect ratios.
+% \end{itemize}
+
+\subsection{Data Preparation}
+
+\subsection{Training}
+
+\section{Image Classification}
 
 % TODO: Insert mandatory system pipeline figure here.
 % \begin{figure}[H]

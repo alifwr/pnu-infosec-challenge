@@ -10,6 +10,11 @@
 \usepackage{fancyhdr}
 \usepackage{float}
 \usepackage{parskip}
+\usepackage{tabularx}
+
+% Bibliography setup
+\usepackage[backend=biber,style=ieee]{biblatex}
+\addbibresource{references.bib}
 
 % Hyperlink setup
 \hypersetup{
@@ -49,6 +54,8 @@
 \lstset{style=mystyle}
 
 % Header and Footer
+\setlength{\headheight}{14.5pt}
+\addtolength{\topmargin}{-2.5pt}
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{Technical Admission Report}
