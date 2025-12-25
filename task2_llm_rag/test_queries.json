@@ -11,10 +11,10 @@
     {
         "category": "CVE Related",
         "queries": [
-            "What are the details of CVE-2024-1234?",
+            "What are the details of CVE-2025-5184?",
             "Can you explain CVE-2023-5678?",
-            "What vulnerabilities are related to Apache Log4j?",
-            "What is the severity of CVE-2022-9999?"
+            "What vulnerabilities are related to PHPGurukul?",
+            "What is the severity of CVE-2025-5065?"
         ]
     },
     {
