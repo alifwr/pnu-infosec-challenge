@@ -88,6 +88,14 @@ finally:
 print("Indexing Complete!")
 
 
+def retrieve_documents(query: str):
+    retrieved_docs = vector_store.similarity_search(query)
+    return [
+        {"content": doc.page_content, "metadata": doc.metadata}
+        for doc in retrieved_docs
+    ]
+
+
 @tool
 def retrieve_context_tool(query: str):
     """

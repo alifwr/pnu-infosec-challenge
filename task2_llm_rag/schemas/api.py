@@ -19,3 +19,12 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     messages: list[MessageWithTool]
+
+
+class RAGRequest(BaseModel):
+    query: str
+
+
+class DocumentResponse(BaseModel):
+    content: str
+    metadata: dict[str, Any]

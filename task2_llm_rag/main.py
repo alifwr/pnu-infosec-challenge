@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from langchain_core.messages import HumanMessage, AIMessage
 
-from schemas.api import ChatRequest, ChatResponse
+from schemas.api import ChatRequest, ChatResponse, DocumentResponse, RAGRequest
+from tools.rag import retrieve_documents
 
 from workflow import get_workflow
 
@@ -41,3 +42,12 @@ async def chat(request: ChatRequest):
         response_messages.append(msg_dict)
 
     return ChatResponse(messages=response_messages)
+
+
+@app.post("/rag-query", response_model=list[DocumentResponse])
+async def get_rag_query(request: RAGRequest):
+    docs = retrieve_documents(request.query)
+    return [
+        DocumentResponse(content=doc["content"], metadata=doc["metadata"])
+        for doc in docs
+    ]
