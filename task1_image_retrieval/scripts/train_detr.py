@@ -17,6 +17,7 @@ from models.detector.rtdetr_v2.box_ops import box_cxcywh_to_xyxy
 from models.loaders import load_model
 from utils.detr_loss import HungarianMatcher, SetCriterion
 from utils.metrics import mean_average_precision
+from utils.early_stopping import EarlyStopping
 
 from modules.detection_dataset import YOLODataset, yolo_collate_fn
 
@@ -25,9 +26,9 @@ BATCH_SIZE = 16  # RT-DETR can be heavy
 IMAGE_SIZE = 640  # RT-DETR usually 640
 NUM_EPOCHS = 100
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-train_dir = "./dataset/indonesia_vehicle/train"
-valid_dir = "./dataset/indonesia_vehicle/valid"
-test_dir = "./dataset/indonesia_vehicle/test"
+train_dir = "./dataset/cctv_dataset/train"
+valid_dir = "./dataset/cctv_dataset/valid"
+test_dir = "./dataset/cctv_dataset/test"
 
 transform = transforms.Compose(
     [
@@ -98,6 +99,9 @@ criterion = SetCriterion(
 ).to(DEVICE)
 
 optimizer = optim.AdamW(model.parameters(), lr=LEARNING_RATE, weight_decay=1e-4)
+
+# Initialize Early Stopping
+early_stopping = EarlyStopping(patience=10, verbose=True, path="rtdetr_custom.pth")
 
 print(f"Starting training on {DEVICE}...")
 
@@ -181,7 +185,15 @@ for epoch in range(NUM_EPOCHS):
     print(f"Epoch {epoch + 1} Validation Loss: {avg_val_loss:.4f}")
     history["val_loss"].append(avg_val_loss)
 
-torch.save(model.state_dict(), "rtdetr_custom.pth")
+    # Early Stopping check
+    early_stopping(avg_val_loss, model)
+
+    if early_stopping.early_stop:
+        print("Early stopping")
+        break
+
+# Load the last checkpoint with the best model
+model.load_state_dict(torch.load("rtdetr_custom.pth"))
 print("Model saved!")
 
 print("Starting testing...")

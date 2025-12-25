@@ -17,16 +17,16 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 IMAGE_SIZE = 416
 CONF_THRESHOLD = 0.25
 NUM_SAMPLES = 5
-WEIGHTS_PATH = "weights/yolo11m_weights.pth"
+# WEIGHTS_PATH removal - handled by config
 TEST_IMG_DIR = "./dataset/indonesia_vehicle/test/images"
-OUTPUT_DIR = "./predictions"
+OUTPUT_DIR = "./predictions_yolo"
 STRIDES = [8, 16, 32]
 
 
 def load_trained_model():
-    print("Initializing YOLO11m (nc=1)...")
-    # Using load_model as requested
-    model = load_model("yolo_11", "configs/yolo_11.json", WEIGHTS_PATH)
+    print("Initializing YOLOv10m...")
+    # Config path now used to provide weights path
+    model = load_model("yolov10", "configs/yolov10.json", None)
 
     return model.to(DEVICE).eval()
 

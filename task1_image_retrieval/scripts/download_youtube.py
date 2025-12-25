@@ -15,7 +15,8 @@ def download_video(url, output_path="downloads"):
         os.makedirs(output_path)
 
     ydl_opts = {
-        'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+        # Prefer 1080p or lower, H.264 encoding (avc1) for maximum compatibility
+        'format': 'bestvideo[height<=1080][ext=mp4][vcodec^=avc1]+bestaudio[ext=m4a]/best[ext=mp4]/best',
         'outtmpl': os.path.join(output_path, '%(title)s.%(ext)s'),
         'noplaylist': True,
     }

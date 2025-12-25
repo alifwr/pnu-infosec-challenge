@@ -14,6 +14,7 @@ sys.path.append(str(Path(__file__).parent.parent))
 
 from utils.detection_loss import DetectionLoss, make_anchors
 from utils.metrics import mean_average_precision
+from utils.early_stopping import EarlyStopping
 
 from modules.detection_dataset import YOLODataset, yolo_collate_fn
 from models.loaders import load_model
@@ -23,9 +24,9 @@ BATCH_SIZE = 16
 IMAGE_SIZE = 416
 NUM_EPOCHS = 100
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-train_dir = "./dataset/indonesia_vehicle/train"
-valid_dir = "./dataset/indonesia_vehicle/valid"
-test_dir = "./dataset/indonesia_vehicle/test"
+train_dir = "./dataset/custom_dataset/train"
+valid_dir = "./dataset/custom_dataset/valid"
+test_dir = "./dataset/custom_dataset/test"
 
 transform = transforms.Compose(
     [
@@ -69,9 +70,7 @@ test_loader = DataLoader(
     pin_memory=True,
 )
 
-model = load_model("yolo_11", "configs/yolo_11.json", "weights/yolo11m_weights.pth").to(
-    DEVICE
-)
+model = load_model("yolov10", "configs/yolov10.json", None).to(DEVICE)
 
 # # Freeze Backbone (b0 - b10)
 # print("Freezing backbone layers...")
@@ -85,6 +84,9 @@ model = load_model("yolo_11", "configs/yolo_11.json", "weights/yolo11m_weights.p
 
 optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
 loss_fn = DetectionLoss(nc=1)
+
+# Initialize Early Stopping
+early_stopping = EarlyStopping(patience=10, verbose=True, path="yolo_custom.pth")
 
 print(f"Starting training on {DEVICE}...")
 
@@ -101,6 +103,8 @@ for epoch in range(NUM_EPOCHS):
         x = x.to(DEVICE)
 
         out = model(x)
+        if isinstance(out, dict):
+            out = out["one2many"]
         loss = loss_fn(out, y)
 
         optimizer.zero_grad()
@@ -136,8 +140,15 @@ for epoch in range(NUM_EPOCHS):
     print(f"Epoch {epoch + 1} Validation Loss: {avg_val_loss:.4f}")
     history["val_loss"].append(avg_val_loss)
 
+    # Early Stopping check
+    early_stopping(avg_val_loss, model)
 
-torch.save(model.state_dict(), "yolo_custom.pth")
+    if early_stopping.early_stop:
+        print("Early stopping")
+        break
+
+# Load the last checkpoint with the best model
+model.load_state_dict(torch.load("yolo_custom.pth"))
 print("Model saved!")
 
 print("Starting testing...")

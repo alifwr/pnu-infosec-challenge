@@ -16,7 +16,7 @@ IMAGE_SIZE = 640
 CONF_THRESHOLD = 0.45
 NUM_SAMPLES = 5
 WEIGHTS_PATH = "rtdetr_custom.pth"
-TEST_IMG_DIR = "./dataset/indonesia_vehicle/test/images"
+TEST_IMG_DIR = "./dataset/custom_dataset/test/images"
 OUTPUT_DIR = "./predictions_detr"
 
 
