@@ -4,9 +4,14 @@ import json
 from .classifier.efficientnet_v2 import EfficientNetV2
 from .classifier.swin_transformer_v2 import SwinTransformerV2
 from .detector.rtdetr_v2 import RTDETRV2
-from .detector.yolo11.yolo11 import YOLO11
+from .detector.yolov10.model import YOLOv10
 
-AVAILABLE_MODELS = ["efficientnet_v2", "swin_transformer_v2", "rtdetr_v2", "yolo_11"]
+AVAILABLE_MODELS = [
+    "efficientnet_v2",
+    "swin_transformer_v2",
+    "rtdetr_v2",
+    "yolov10",
+]
 
 
 def load_model(name: str, config_path: str, weight_path: str = None):
@@ -37,21 +42,29 @@ def load_model(name: str, config_path: str, weight_path: str = None):
             weights=weights,
             load_components=["backbone", "encoder"] if weights else None,
         )
-    elif name == "yolo_11":
-        scale = "n"
-        if weight_path is not None and "yolo11s" in weight_path:
-            scale = "s"
-        elif weight_path is not None and "yolo11m" in weight_path:
-            scale = "m"
-        elif weight_path is not None and "yolo11l" in weight_path:
-            scale = "l"
-        if weight_path is not None and "yolo11x" in weight_path:
-            scale = "x"
 
-        load_components = [f"b{i}" for i in range(11)] + [
-            f"h{i}" for i in range(11, 23)
-        ]
-        model = YOLO11(
+    elif name == "yolov10":
+        if weight_path is None and config_path:
+            with open(config_path, "r") as f:
+                config = json.load(f)
+            weight_path = config.get("weights_path")
+
+        scale = "n"
+        if weight_path is not None:
+            fname = os.path.basename(weight_path)
+            if "yolo10s" in fname:
+                scale = "s"
+            elif "yolo10m" in fname:
+                scale = "m"
+            elif "yolo10l" in fname:
+                scale = "l"
+            elif "yolo10x" in fname:
+                scale = "x"
+
+        # load_components: backbone only (b0-b10) as requested ("no head")
+        load_components = [f"b{i}" for i in range(11)]
+
+        model = YOLOv10(
             nc=1, scale=scale, weights=weight_path, load_components=load_components
         )
 
