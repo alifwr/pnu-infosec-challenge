@@ -9,9 +9,9 @@ class YOLODataset(Dataset):
         self.img_dir = img_dir
         self.label_dir = label_dir
         self.transform = transform
-        self.img_files = [
-            f for f in os.listdir(img_dir) if f.endswith((".jpg", ".png", ".jpeg"))
-        ]
+        self.img_files = sorted(
+            [f for f in os.listdir(img_dir) if f.endswith((".jpg", ".png", ".jpeg"))]
+        )
 
     def __len__(self):
         return len(self.img_files)
