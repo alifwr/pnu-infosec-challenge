@@ -16,3 +16,4 @@ venv/
 *.mp4
 output/
 *.pth
+dataset/
