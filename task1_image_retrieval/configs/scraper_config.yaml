@@ -1,0 +1,24 @@
+output_dir: data/indonesian
+queries:
+  - Pickup Indonesia
+  - Bus Indonesia
+  - SUV Car Indonesia
+  - MPV Car Indonesia
+  - Truck Indonesia
+images_per_query: 1000
+min_width: 640
+min_height: 480
+sources:
+  google: false
+  bing: true
+  duckduckgo: true
+scraping_settings:
+  headless: false
+  delay_between_downloads:
+    - 0.3
+    - 0.7
+  delay_between_scrolls:
+    - 1.0
+    - 2.0
+  max_scrolls: 10
+  timeout: 30

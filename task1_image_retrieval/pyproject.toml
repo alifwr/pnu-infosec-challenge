@@ -1,0 +1,16 @@
+[project]
+name = "task1-image-retrieval"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "albumentations>=2.0.8",
+    "groundingdino-py>=0.4.0",
+    "imagehash>=4.3.2",
+    "pillow>=12.1.0",
+    "playwright>=1.57.0",
+    "pyyaml>=6.0.3",
+    "requests>=2.32.5",
+    "ultralytics>=8.3.246",
+]
