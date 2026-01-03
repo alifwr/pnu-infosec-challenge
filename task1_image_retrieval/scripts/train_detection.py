@@ -1,5 +1,5 @@
 from ultralytics import YOLO, RTDETR
-from modules.utils import load_specific_weights, inspect_model
+from modules.utils import load_specific_weights
 import os
 import torch
 
@@ -13,7 +13,7 @@ def train():
     weights_path = "weights/"
     weights_files = ["yolov10l.pt", "yolov10x.pt", "rtdetr-l.pt", "rtdetr-x.pt"]
     data_path = "dataset/yolo_vehicles/data.yaml"
-    project_name = "task1_image_retrieval"
+    project_name = "vehicle_detection"
     run_name = "vehicles_yolo10x"
 
     # Initialize wandb
