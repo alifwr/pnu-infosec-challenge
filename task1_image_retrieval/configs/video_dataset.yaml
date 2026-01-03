@@ -1,0 +1,19 @@
+videos_dir: data/videos
+output_dir: dataset/yolo_vehicles
+frame_interval: 30  # Extract 1 frame every N frames
+train_ratio: 0.8  # 80% train, 20% val
+
+# Grounding DINO settings
+grounding_config: configs/GroundingDINO_SwinT_OGC.py
+grounding_weights: weights/groundingdino_swint_ogc.pth
+
+# Detection settings
+text_prompt: car
+box_threshold: 0.30
+text_threshold: 0.30
+
+# Class mapping (optional)
+# If single_class_mode is True, all detections are mapped to class_id 0
+single_class_mode: True
+class_names: ["car"]  # Used for data.yaml generation
+show_preview: True

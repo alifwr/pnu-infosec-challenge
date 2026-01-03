@@ -8,9 +8,11 @@ dependencies = [
     "albumentations>=2.0.8",
     "groundingdino-py>=0.4.0",
     "imagehash>=4.3.2",
+    "pandas>=2.3.3",
     "pillow>=12.1.0",
     "playwright>=1.57.0",
     "pyyaml>=6.0.3",
     "requests>=2.32.5",
     "ultralytics>=8.3.246",
+    "wandb>=0.23.1",
 ]
