@@ -2,73 +2,85 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
-\abx@aux@refcontext{none/global//global/global}
-\abx@aux@cite{0}{lv2024rtdetrv2improvedbaselinebagoffreebies}
-\abx@aux@segm{0}{0}{lv2024rtdetrv2improvedbaselinebagoffreebies}
-\abx@aux@cite{0}{wang2024yolov10}
-\abx@aux@segm{0}{0}{wang2024yolov10}
-\abx@aux@cite{0}{zhao2024detrsbeatyolosrealtime}
-\abx@aux@segm{0}{0}{zhao2024detrsbeatyolosrealtime}
+\abx@aux@refcontext{none/global//global/global/global}
 \@writefile{toc}{\contentsline {chapter}{\numberline {1}Task 1: Computer Vision (Image Task)}{2}{chapter.1}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {1.1}Object Detection Model}{2}{section.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.1}RT-DETRv2}{2}{subsection.1.1.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces RT-DETR Architecture}}{2}{figure.1.1}\protected@file@percent }
-\newlabel{fig:rt-detr}{{1.1}{2}{RT-DETR Architecture}{figure.1.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.2}Data Preparation}{3}{subsection.1.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.3}Training}{3}{subsection.1.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {1.2}Image Classification}{3}{section.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {1.3}Methodology}{3}{section.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.3.1}Object Detection}{3}{subsection.1.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.3.2}Classifier}{3}{subsection.1.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {1.4}Evaluation}{3}{section.1.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {2}Task 2: RAG Pipeline (LLM Task)}{4}{chapter.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.1}Object Detection}{2}{section.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.1}Dataset Creation}{2}{subsection.1.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Video Acquisition}{2}{subsection.1.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Automated Annotation (Teacher-Student Method)}{2}{subsection.1.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.2}Model Selection}{3}{subsection.1.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{YOLOv10}{3}{subsection.1.1.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces YOLOv10 Architecture}}{3}{figure.1.1}\protected@file@percent }
+\newlabel{fig:yolov10}{{1.1}{3}{YOLOv10 Architecture}{figure.1.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{RT-DETR}{4}{figure.1.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1.2}{\ignorespaces RT-DETR Architecture}}{4}{figure.1.2}\protected@file@percent }
+\newlabel{fig:rt-detr}{{1.2}{4}{RT-DETR Architecture}{figure.1.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.3}Training \& Evaluation}{4}{subsection.1.1.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1.3}{\ignorespaces YOLOv10 Training Loss}}{5}{figure.1.3}\protected@file@percent }
+\newlabel{fig:yolo_loss}{{1.3}{5}{YOLOv10 Training Loss}{figure.1.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Box Loss (CIoU Loss)}{5}{figure.1.3}\protected@file@percent }
+\newlabel{eq:ciou}{{1.1}{5}{Box Loss (CIoU Loss)}{equation.1.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Distribution Focal Loss (DFL)}{6}{equation.1.1}\protected@file@percent }
+\newlabel{eq:dfl}{{1.2}{6}{Distribution Focal Loss (DFL)}{equation.1.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{L1 Loss}{6}{equation.1.2}\protected@file@percent }
+\newlabel{eq:l1}{{1.3}{6}{L1 Loss}{equation.1.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{GIoU Loss}{6}{equation.1.3}\protected@file@percent }
+\newlabel{eq:giou}{{1.4}{6}{GIoU Loss}{equation.1.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.4}{\ignorespaces RT-DETR Training Loss}}{7}{figure.1.4}\protected@file@percent }
+\newlabel{fig:detr_loss}{{1.4}{7}{RT-DETR Training Loss}{figure.1.4}{}}
+\newlabel{eq:precision}{{1.5}{7}{GIoU Loss}{equation.1.5}{}}
+\newlabel{eq:recall}{{1.6}{7}{GIoU Loss}{equation.1.6}{}}
+\newlabel{eq:ap}{{1.7}{8}{GIoU Loss}{equation.1.7}{}}
+\newlabel{eq:mAP50}{{1.8}{8}{GIoU Loss}{equation.1.8}{}}
+\newlabel{eq:mAP50-95}{{1.9}{8}{GIoU Loss}{equation.1.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.5}{\ignorespaces Training Metrics Comparison}}{8}{figure.1.5}\protected@file@percent }
+\newlabel{fig:training_metrics}{{1.5}{8}{Training Metrics Comparison}{figure.1.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.2}Image Classification}{9}{section.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Task 2: RAG Pipeline (LLM Task)}{10}{chapter.2}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {2.1}RAG Pipeline}{4}{section.2.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces RAG Pipeline Flow}}{4}{figure.2.1}\protected@file@percent }
-\newlabel{fig:rag_pipeline}{{2.1}{4}{RAG Pipeline Flow}{figure.2.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Ingestion Phase}{5}{subsection.2.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Retrieval Phase}{5}{subsection.2.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}LLM Integration}{5}{section.2.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces LLM Integration with RAG}}{6}{figure.2.2}\protected@file@percent }
-\newlabel{fig:llm_integration}{{2.2}{6}{LLM Integration with RAG}{figure.2.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Guardrails Layer}{6}{subsection.2.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Tools \& RAG Layer}{7}{subsection.2.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Core Agent Layer}{7}{subsection.2.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.3}Experiments}{7}{section.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}RAG Pipeline}{7}{subsection.2.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{PII Related Queries}{8}{subsection.2.3.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces PII Related Queries Results}}{8}{table.2.1}\protected@file@percent }
-\newlabel{tab:pii_related_queries_result}{{2.1}{8}{PII Related Queries Results}{table.2.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{CVE Related Queries}{8}{table.2.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2.2}{\ignorespaces CVE Related Queries Results}}{8}{table.2.2}\protected@file@percent }
-\newlabel{tab:cve_related_queries_result}{{2.2}{8}{CVE Related Queries Results}{table.2.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{General Knowledge Queries}{8}{table.2.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2.3}{\ignorespaces General Knowledge Queries Results}}{9}{table.2.3}\protected@file@percent }
-\newlabel{tab:general_knowledge_queries_result}{{2.3}{9}{General Knowledge Queries Results}{table.2.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}LLM Integration}{9}{subsection.2.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{PII Related Queries}{9}{subsection.2.3.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2.4}{\ignorespaces PII Related Queries Results (LLM)}}{9}{table.2.4}\protected@file@percent }
-\newlabel{tab:pii_related_queries_llm_result}{{2.4}{9}{PII Related Queries Results (LLM)}{table.2.4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{CVE Related Queries}{10}{table.2.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2.5}{\ignorespaces CVE Related Queries Results (LLM)}}{10}{table.2.5}\protected@file@percent }
-\newlabel{tab:cve_related_queries_llm_result}{{2.5}{10}{CVE Related Queries Results (LLM)}{table.2.5}{}}
-\@writefile{toc}{\contentsline {subsubsection}{General Knowledge Queries}{10}{table.2.5}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2.6}{\ignorespaces General Knowledge Queries Results (LLM)}}{10}{table.2.6}\protected@file@percent }
-\newlabel{tab:general_knowledge_queries_llm_result}{{2.6}{10}{General Knowledge Queries Results (LLM)}{table.2.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}System Robustness Test from Prompt Injection}{10}{subsection.2.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Bonus Task: Adversarial Attacks}{11}{chapter.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}RAG Pipeline}{10}{section.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces RAG Pipeline Flow}}{10}{figure.2.1}\protected@file@percent }
+\newlabel{fig:rag_pipeline}{{2.1}{10}{RAG Pipeline Flow}{figure.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Ingestion Phase}{11}{subsection.2.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Retrieval Phase}{11}{subsection.2.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}LLM Integration}{11}{section.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces LLM Integration with RAG}}{12}{figure.2.2}\protected@file@percent }
+\newlabel{fig:llm_integration}{{2.2}{12}{LLM Integration with RAG}{figure.2.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Guardrails Layer}{12}{subsection.2.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Tools \& RAG Layer}{13}{subsection.2.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Core Agent Layer}{13}{subsection.2.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Experiments}{13}{section.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}RAG Pipeline}{13}{subsection.2.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{PII Related Queries}{14}{subsection.2.3.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces PII Related Queries Results}}{14}{table.2.1}\protected@file@percent }
+\newlabel{tab:pii_related_queries_result}{{2.1}{14}{PII Related Queries Results}{table.2.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{CVE Related Queries}{14}{table.2.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.2}{\ignorespaces CVE Related Queries Results}}{14}{table.2.2}\protected@file@percent }
+\newlabel{tab:cve_related_queries_result}{{2.2}{14}{CVE Related Queries Results}{table.2.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{General Knowledge Queries}{14}{table.2.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.3}{\ignorespaces General Knowledge Queries Results}}{15}{table.2.3}\protected@file@percent }
+\newlabel{tab:general_knowledge_queries_result}{{2.3}{15}{General Knowledge Queries Results}{table.2.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}LLM Integration}{15}{subsection.2.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{PII Related Queries}{15}{subsection.2.3.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.4}{\ignorespaces PII Related Queries Results (LLM)}}{15}{table.2.4}\protected@file@percent }
+\newlabel{tab:pii_related_queries_llm_result}{{2.4}{15}{PII Related Queries Results (LLM)}{table.2.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{CVE Related Queries}{16}{table.2.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.5}{\ignorespaces CVE Related Queries Results (LLM)}}{16}{table.2.5}\protected@file@percent }
+\newlabel{tab:cve_related_queries_llm_result}{{2.5}{16}{CVE Related Queries Results (LLM)}{table.2.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{General Knowledge Queries}{16}{table.2.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.6}{\ignorespaces General Knowledge Queries Results (LLM)}}{16}{table.2.6}\protected@file@percent }
+\newlabel{tab:general_knowledge_queries_llm_result}{{2.6}{16}{General Knowledge Queries Results (LLM)}{table.2.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}System Robustness Test from Prompt Injection}{16}{subsection.2.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Bonus Task: Adversarial Attacks}{17}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Attack Methodology}{11}{section.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Robustness Results}{11}{section.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Conclusion}{12}{chapter.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Attack Methodology}{17}{section.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Robustness Results}{17}{section.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Conclusion}{18}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\abx@aux@read@bbl@mdfivesum{AFC22FB6E7640E56D669301D680F7646}
-\abx@aux@defaultrefcontext{0}{lv2024rtdetrv2improvedbaselinebagoffreebies}{none/global//global/global}
-\abx@aux@defaultrefcontext{0}{wang2024yolov10}{none/global//global/global}
-\abx@aux@defaultrefcontext{0}{zhao2024detrsbeatyolosrealtime}{none/global//global/global}
-\gdef \@abspage@last{14}
+\abx@aux@read@bbl@mdfivesum{E75D7E0DB03F09D45B25DF2F538BB294}
+\gdef \@abspage@last{19}
