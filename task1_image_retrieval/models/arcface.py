@@ -41,7 +41,7 @@ class ArcFaceHead(nn.Module):
         return output
 
 
-class TankClassifier(nn.Module):
+class VehicleClassifier(nn.Module):
     def __init__(
         self,
         num_classes,
@@ -52,7 +52,7 @@ class TankClassifier(nn.Module):
         super().__init__()
 
         # Backbone - use pretrained model
-        if "efficientnet" in backbone:
+        if "efficientnet" in backbone or "swin" in backbone:
             self.backbone = timm.create_model(
                 backbone, pretrained=pretrained, num_classes=0
             )
@@ -81,16 +81,3 @@ class TankClassifier(nn.Module):
         else:
             # Inference - return normalized embeddings
             return F.normalize(embeddings, dim=1)
-
-
-# Initialize model
-tank_types = [
-    "M1_Abrams",
-    "T72",
-    "T90",
-    "Leopard_2",
-    "Challenger_2",
-    "Type_99",
-    "Merkava",
-]
-model = TankClassifier(num_classes=len(tank_types))

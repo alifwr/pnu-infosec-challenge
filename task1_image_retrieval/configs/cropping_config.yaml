@@ -1,7 +1,7 @@
 grounding_config: configs/GroundingDINO_SwinT_OGC.py
 grounding_weights: weights/groundingdino_swint_ogc.pth
-images_dir: data/indonesian/images
-output_dir: data/indonesian/cropped
+images_dir: data/indonesian_vehicles/images
+output_dir: data/indonesian_vehicles/cropped
 text_prompt: vehicle
 box_threshold: 0.35
 text_threshold: 0.25

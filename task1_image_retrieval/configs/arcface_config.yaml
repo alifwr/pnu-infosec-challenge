@@ -1,6 +1,5 @@
-images_dir: data/indonesian/cropped
-output_dir: outputs/tank_classifier_new
-backbone: efficientnet_b3
+images_dir: data/indonesian_vehicles/cropped
+output_dir: outputs/indonesian_vehicles
 embedding_size: 512
 image_size: 224
 batch_size: 16

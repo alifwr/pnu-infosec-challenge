@@ -27,12 +27,13 @@ def load_config(config_path: str = "configs/scraper_config.yaml") -> dict:
         return yaml.safe_load(f)
 
 
-async def main():
+async def main(config_path: str = "configs/scraper_config.yaml"):
     # Load configuration
-    config = load_config()
+    config = load_config(config_path)
 
     logger.info("=" * 60)
     logger.info("WEB SCRAPING IMAGE COLLECTOR")
+    logger.info(f"Config: {config_path}")
     logger.info("=" * 60)
     logger.info("No API keys needed!")
     logger.info("")
@@ -125,7 +126,10 @@ async def main():
 
 if __name__ == "__main__":
     try:
-        asyncio.run(main())
+        if len(sys.argv) > 1:
+            asyncio.run(main(sys.argv[1]))
+        else:
+            asyncio.run(main())
     except KeyboardInterrupt:
         logger.info("\n\n⚠ Scraping interrupted by user")
         sys.exit(0)
