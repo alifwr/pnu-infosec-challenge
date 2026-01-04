@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 0 "main.bcf" "main.bbl" "main" 1767487010.98994 -1
-  "main.bcf" 1767487010.91433 107150 8206b2240db7184a413b8182089fca81 "pdflatex"
+["biber main"] 0 "main.bcf" "main.bbl" "main" 1767546841.34844 -1
+  "main.bcf" 1767546841.28245 107150 8206b2240db7184a413b8182089fca81 "pdflatex"
   "references.bib" 1766640892.38593 1116 3b656fd4f77c1fae9da21730ffad43fc ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1767487008.38468 "/home/alif/pnu/report/main.tex" "main.pdf" "main" 1767487010.99017 0
+["pdflatex"] 1767546838.15746 "/home/alif/pnu/report/main.tex" "main.pdf" "main" 1767546841.34867 0
   "/etc/texmf/web2c/texmf.cnf" 1766015017.74193 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/alif/pnu/report/main.tex" 1767486926.19977 496 b26ef7b0d90fdd38849308fa566b1e39 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -144,8 +144,13 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1766059583.22169 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1766059662 8212680 2f04877e65e950740ab8abae156f90f2 ""
-  "chapters/02_image_task.tex" 1767487005.54617 21117 2a0b2b236ae963be662d3fbecda69e19 ""
+  "chapters/02_image_task.tex" 1767546837.9428 30465 8af5e9c9d8342429746b77944b2fc0c8 ""
   "chapters/03_llm_rag_task.tex" 1766668072.63 17120 bb2aeea5fa4e622ceceae17332343e4d ""
+  "figures/classifier_train_loss.png" 1767546418.33023 23911 dc471ec243b2174e9773c2937bd3b5b2 ""
+  "figures/classifier_val_loss.png" 1767546418.3458 27887 1e28571354a7dc2a6731627fe819dfbf ""
+  "figures/cm_efficientnet.png" 1767545583.48842 40026 05335020209e4d13cc783477a4d3b771 ""
+  "figures/cm_swin.png" 1767545583.49089 40452 eb1280bf7d728a6b8748cf35fc7088a7 ""
+  "figures/cropping_pipeline.png" 1767530399.13581 943379 c7aeabe8941f2b988b74e533d5a7f073 ""
   "figures/dataset_sample.jpg" 1767483849.67698 631641 6bbd3b581464288ebfde710b7d17723d ""
   "figures/detr_loss.png" 1767482299.77148 48553 a2e8de9c21ff78a049151d953220edcd ""
   "figures/llm_integration_pipeline.png" 1766645724.33826 950234 7a01f3d45533a4dc42a8884220f326b1 ""
@@ -161,12 +166,12 @@
   "figures/yolo10l_confusion_matrix.png" 1767484320.71489 92847 cb00391a612edd6057caedc7ce887d80 ""
   "figures/yolo_loss.png" 1767482299.77249 37148 518b3aa4aed32e184a5b8f1509041f11 ""
   "figures/yolov10.png" 1767482299.77312 145585 917fecf4228885f260c14c24d859cbcf ""
-  "main.aux" 1767487010.91333 10305 6ec51ad93d400fa9f2240b5f49ee8973 "pdflatex"
+  "main.aux" 1767546841.28054 12300 0f1953cc37d62e53ac3170b26cc8c65d "pdflatex"
   "main.bbl" 1767483542.06101 466 ee04f40f768daeed26442158e95aba61 "biber main"
-  "main.out" 1767487010.91433 3329 2bf681b2cc5b2deac421e93ef0e8a4f9 "pdflatex"
-  "main.run.xml" 1767487010.91659 2402 7c866ed2192e71c57464ed4279aadefa "pdflatex"
+  "main.out" 1767546841.28154 3329 2bf681b2cc5b2deac421e93ef0e8a4f9 "pdflatex"
+  "main.run.xml" 1767546841.28351 2402 7c866ed2192e71c57464ed4279aadefa "pdflatex"
   "main.tex" 1767486926.19977 496 b26ef7b0d90fdd38849308fa566b1e39 ""
-  "main.toc" 1767487010.91659 2942 86e321fa032f6ffed196b5a0ff7d28e9 "pdflatex"
+  "main.toc" 1767546841.28351 3150 a026130cef2f918daf2d2ca98f5ef2b3 "pdflatex"
   "preamble.tex" 1767482299.78161 1471 d3a9a7305652acc198404ee852c5bee0 ""
   (generated)
   "main.aux"

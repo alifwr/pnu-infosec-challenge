@@ -273,7 +273,14 @@ Instead of training a detector from scratch, this pipeline leverages \textbf{Gro
     \item \textbf{Cropping}: The region of interest defined by the bounding box is cropped and saved as a new image. Crops smaller than $32 \times 32$ pixels are discarded to maintain dataset quality.
 \end{itemize}
 
-This process transforms noisy internet search results into a clean, object-centric dataset where the vehicle is the primary subject. The pipeline successfully generated 274 cropped vehicle images, stored in \path{task1_image_retrieval/data/indonesian/cropped}, which served as the training data for the classification model. Figure~\ref{fig:creation_pipeline} demonstrates this pipeline, showing representative examples for each vehicle class: Pickup, Truck, Bus, SUV, and MPV.
+This process transforms noisy internet search results into a clean, object-centric dataset where the vehicle is the primary subject. The pipeline successfully generated 274 cropped vehicle images, stored in \path{task1_image_retrieval/data/indonesian/cropped}, which served as the training data for the classification model. Figure~\ref{fig:cropping_pipeline} demonstrates this pipeline. Figures~\ref{fig:pickup_sample}, \ref{fig:truck_sample}, \ref{fig:bus_sample}, \ref{fig:suv_sample}, and~\ref{fig:mpv_sample} show representative examples for each vehicle class: Pickup, Truck, Bus, SUV, and MPV, respectively.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/cropping_pipeline.png}
+    \caption{Cropping Pipeline}
+    \label{fig:cropping_pipeline}
+\end{figure}
 
 \begin{figure}[H]
     \centering
@@ -312,4 +319,121 @@ This process transforms noisy internet search results into a clean, object-centr
 
 \subsection{Model Selection}
 
+For the image classification task, I opted for a Metric Learning approach using \textbf{ArcFace} (Additive Angular Margin Loss) rather than a standard softmax classification head. Standard Cross-Entropy loss encourages separability between classes but does not enforce intra-class compactness (keeping samples of the same class close together) or maximize inter-class discrepancy (pushing different classes far apart).
+
+Given the relatively small size of the scraped dataset (~270 images), learning highly discriminative features is crucial. ArcFace addresses this by mapping features to a hypersphere and adding an additive angular margin penalty $m$. The loss function is defined as:
+
+\begin{equation}
+    L_{ArcFace} = -\frac{1}{N} \sum_{i=1}^{N} \log \frac{e^{s(\cos(\theta_{y_i} + m))}}{e^{s(\cos(\theta_{y_i} + m))} + \sum_{j \neq y_i} e^{s \cos \theta_j}}
+    \label{eq:arcface}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $s$ is the scaling factor (set to 30.0).
+    \item $m$ is the additive angular margin (set to 0.50).
+    \item $\theta_{y_i}$ is the angle between the feature vector and the weight vector of the ground truth class.
+\end{itemize}
+
+I experimented with two distinct backbones to extract the feature embeddings:
+\begin{enumerate}
+    \item \textbf{EfficientNet-B3}: A CNN-based architecture known for its parameter efficiency and strong performance on transfer learning tasks.
+    \item \textbf{Swin Transformer (Tiny)}: A Hierarchical Vision Transformer that uses shifted windows. It was selected to investigate if attention mechanisms could capture better global context for vehicle differentiation compared to CNNs.
+\end{enumerate}
+
 \subsection{Training \& Evaluation}
+
+The training was implemented using PyTorch and orchestrated via a custom script \texttt{train\_arcface.py}. To ensure robust performance despite the limited data, I employed aggressive data augmentation techniques using the Albumentations library.
+
+\subsubsection{Experimental Setup}
+\begin{itemize}
+    \item \textbf{Data Split}: The cropped dataset was split into Training (70\%), Gallery (15\%), and Test (15\%) sets. The ``Gallery'' set acts as a validation set for prototypical networks.
+    \item \textbf{Hyperparameters}:
+          \begin{itemize}
+              \item \textbf{Epochs}: 100
+              \item \textbf{Batch Size}: 16
+              \item \textbf{Optimizer}: AdamW with a learning rate of $1\times10^{-4}$ and weight decay of $1\times10^{-4}$ to prevent overfitting.
+              \item \textbf{Scheduler}: Cosine Annealing learning rate scheduler.
+          \end{itemize}
+    \item \textbf{Augmentations}: Geometric transformations (Shift, Scale, Rotate, Perspective), Color Jitter (Brightness, Contrast, Hue), and Coarse Dropout (randomly masking parts of the image) were applied to the training set to force the model to focus on structural features rather than memorizing pixels.
+\end{itemize}
+
+\subsubsection{Evaluation Strategy}
+Unlike standard classification which checks if the maximum logit corresponds to the correct class, the ArcFace model was evaluated in a retrieval-based manner.
+\begin{enumerate}
+    \item \textbf{Gallery Build}: The model extracts embeddings for all images in the Gallery set. Prototype embeddings are calculated by averaging the embeddings of all samples belonging to the same class.
+    \item \textbf{Inference}: For each image in the Test set, its embedding is compared against the stored Class Prototypes using Cosine Similarity.
+    \item \textbf{Prediction}: The class of the prototype with the highest similarity score is assigned as the predicted label.
+\end{enumerate}
+
+This method allows the system to easily adapt to new vehicle types in the future simply by adding their embeddings to the gallery, without necessarily retraining the entire backbone (few-shot capability). The performance of both EfficientNet and Swin Transformer backbones was benchmarked based on Classification Accuracy and Inference Speed.
+
+\subsubsection{Results Analysis}
+
+The quantitative results of the experiments are summarized in Table~\ref{tab:classification_benchmark}. Both models achieved high accuracy ($>90\%$) on the test set, demonstrating the effectiveness of the ArcFace loss in learning discriminative features even with limited data.
+
+\begin{table}[H]
+    \centering
+    \caption{Classification Model Benchmark}
+    \label{tab:classification_benchmark}
+    \setlength{\tabcolsep}{3pt}
+    \begin{tabular}{lccc}
+        \hline
+        \textbf{Model Backbone} & \textbf{Accuracy} & \textbf{Inference (ms)} & \textbf{Params (M)} \\ \hline
+        EfficientNet-B3         & \textbf{91.30\%}  & \textbf{3.35}           & \textbf{11.49}      \\
+        Swin-Tiny (Window 7)    & 90.22\%           & 3.65                    & 27.92               \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{sloppypar}
+    \textbf{Performance Comparison}: EfficientNet-B3 outperformed the Swin Transformer (Tiny) across all tracked metrics.
+\end{sloppypar}
+\begin{enumerate}
+    \item \textbf{Accuracy}: EfficientNet achieved a slightly higher accuracy of 91.30\% compared to Swin's 90.22\%. This suggests that for this specific dataset size, the strong inductive biases of CNNs (translation invariance, locality) were more beneficial than the global attention mechanisms of the Vision Transformer, which typically require more data to generalize effectively.
+    \item \textbf{Efficiency}: EfficientNet was significantly lighter (11.5M parameters vs 27.9M) and faster (3.35ms vs 3.65ms per image). This makes EfficientNet the optimal choice for deployment in resource-constrained environments like edge devices or real-time surveillance systems.
+\end{enumerate}
+
+\textbf{Training Dynamics}:
+Figures~\ref{fig:train_loss} and~\ref{fig:val_loss} illustrate the training and validation loss curves for both models. Both architectures showed stable convergence, with the validation loss closely following the training loss, indicating that the regularization techniques (weight decay, augmentations) successfully prevented significant overfitting.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/classifier_train_loss.png}
+    \caption{Training Loss Comparison}
+    \label{fig:train_loss}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/classifier_val_loss.png}
+    \caption{Validation Loss Comparison}
+    \label{fig:val_loss}
+\end{figure}
+
+The Swin Transformer (represented in teal) and EfficientNet (represented in light blue). In the training phase, both models demonstrate strong capacity, rapidly converging from an initial loss of approximately 14 to near-zero values within the first 20 steps. This indicates that both architectures are successfully minimizing the objective function and effectively fitting the training data.
+
+However, the validation phase reveals a critical divergence in stability and generalization between the two architectures. The EfficientNet model exhibits a smooth and consistent validation loss curve, settling around a loss value of 3.5, which reflects the stability often provided by the inductive biases inherent in CNN. In contrast, the Swin Transformer displays significant volatility, characterized by sharp, erratic spikes throughout the validation process. This instability suggests that the Transformer-based model is struggling to generalize on this specific dataset or is highly sensitive to the current hyperparameters, likely requiring more extensive data or regularization techniques (such as gradient clipping) to stabilize. Furthermore, for both models, a gap persists between the near-zero training loss and the significantly higher validation loss, indicating a general tendency toward overfitting where the models are memorizing specific training identities rather than learning robust features applicable to unseen data.
+
+\textbf{Confusion Matrix Analysis}:
+Figures~\ref{fig:cm_eff} and~\ref{fig:cm_swin} show the confusion matrices for the best-performing checkpoints. EfficientNet demonstrates high diagonal density, indicating robust classification across all vehicle types (Bus, MPV, Pickup, SUV, Truck). The few misclassifications are likely due to visual similarities between classes (e.g., SUVs vs MPVs) or occlusion in the source images.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/cm_efficientnet.png}
+        \caption{EfficientNet-B3 Confusion Matrix}
+        \label{fig:cm_eff}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/cm_swin.png}
+        \caption{Swin-Tiny Confusion Matrix}
+        \label{fig:cm_swin}
+    \end{minipage}
+    \caption{Confusion Matrices on Test Set}
+    \label{fig:confusion_matrices}
+\end{figure}
+
+In conclusion, based on the superior accuracy-to-efficiency ratio, \textbf{EfficientNet-B3} is selected as the final backbone for the vehicle classification module.
+

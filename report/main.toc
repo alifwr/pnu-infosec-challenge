@@ -15,23 +15,26 @@
 \contentsline {subsection}{\numberline {1.2.1}Dataset Creation}{12}{subsection.1.2.1}%
 \contentsline {subsubsection}{Web Scraping}{12}{subsection.1.2.1}%
 \contentsline {subsubsection}{Object Cropping (GroundingDINO)}{13}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Model Selection}{15}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}Training \& Evaluation}{15}{subsection.1.2.3}%
-\contentsline {chapter}{\numberline {2}Task 2: RAG Pipeline (LLM Task)}{16}{chapter.2}%
-\contentsline {section}{\numberline {2.1}RAG Pipeline}{16}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Ingestion Phase}{17}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Retrieval Phase}{17}{subsection.2.1.2}%
-\contentsline {section}{\numberline {2.2}LLM Integration}{17}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Guardrails Layer}{18}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Tools \& RAG Layer}{19}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Core Agent Layer}{19}{subsection.2.2.3}%
-\contentsline {section}{\numberline {2.3}Experiments}{19}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}RAG Pipeline}{19}{subsection.2.3.1}%
-\contentsline {subsubsection}{PII Related Queries}{20}{subsection.2.3.1}%
-\contentsline {subsubsection}{CVE Related Queries}{20}{table.2.1}%
-\contentsline {subsubsection}{General Knowledge Queries}{20}{table.2.2}%
-\contentsline {subsection}{\numberline {2.3.2}LLM Integration}{21}{subsection.2.3.2}%
-\contentsline {subsubsection}{PII Related Queries}{21}{subsection.2.3.2}%
-\contentsline {subsubsection}{CVE Related Queries}{22}{table.2.4}%
-\contentsline {subsubsection}{General Knowledge Queries}{22}{table.2.5}%
-\contentsline {subsection}{\numberline {2.3.3}System Robustness Test from Prompt Injection}{22}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {1.2.2}Model Selection}{16}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Training \& Evaluation}{17}{subsection.1.2.3}%
+\contentsline {subsubsection}{Experimental Setup}{17}{subsection.1.2.3}%
+\contentsline {subsubsection}{Evaluation Strategy}{17}{subsection.1.2.3}%
+\contentsline {subsubsection}{Results Analysis}{18}{Item.5}%
+\contentsline {chapter}{\numberline {2}Task 2: RAG Pipeline (LLM Task)}{21}{chapter.2}%
+\contentsline {section}{\numberline {2.1}RAG Pipeline}{21}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Ingestion Phase}{22}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Retrieval Phase}{22}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}LLM Integration}{22}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Guardrails Layer}{23}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Tools \& RAG Layer}{24}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Core Agent Layer}{24}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3}Experiments}{24}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}RAG Pipeline}{24}{subsection.2.3.1}%
+\contentsline {subsubsection}{PII Related Queries}{25}{subsection.2.3.1}%
+\contentsline {subsubsection}{CVE Related Queries}{25}{table.2.1}%
+\contentsline {subsubsection}{General Knowledge Queries}{25}{table.2.2}%
+\contentsline {subsection}{\numberline {2.3.2}LLM Integration}{26}{subsection.2.3.2}%
+\contentsline {subsubsection}{PII Related Queries}{26}{subsection.2.3.2}%
+\contentsline {subsubsection}{CVE Related Queries}{27}{table.2.4}%
+\contentsline {subsubsection}{General Knowledge Queries}{27}{table.2.5}%
+\contentsline {subsection}{\numberline {2.3.3}System Robustness Test from Prompt Injection}{27}{subsection.2.3.3}%
