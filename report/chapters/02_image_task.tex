@@ -246,6 +246,70 @@ To further analyze the model performance, we inspected the confusion matrices (F
 
 \subsection{Dataset Creation}
 
+To train a robust image classification model capable of distinguishing between specific vehicle types, I constructed a custom dataset using a two-stage pipeline: automated web scraping followed by intelligent object cropping.
+
+\subsubsection{Web Scraping}
+The first stage involved gathering a large and diverse collection of raw images from the internet. I developed a custom scraping script, \texttt{run\_scraper.py} (\href{https://github.com/alifwr/pnu-infosec-challenge/blob/main/task1_image_retrieval/scripts/run_scraper.py}{\path{task1_image_retrieval/scripts/run\_scraper.py}}), which orchestrates concurrent downloads from multiple search engine backends (Google Images, Bing Images, and DuckDuckGo).
+
+The scraper operates by iterating through a predefined list of search queries corresponding to the target vehicle classes. For each query, it:
+\begin{sloppypar}
+    \begin{itemize}
+        \item Dispatches asynchronous requests to the search engines to maximize throughput.
+        \item Filters images based on minimum resolution requirements to ensure quality.
+        \item Saves the raw images with filenames that preserve the query metadata (e.g., \texttt{Bus\_bing\_[timestamp].jpg}) and logs detailed metadata to \path{task1_image_retrieval/data/indonesian/metadata.json}, which is crucial for downstream labeling and traceability.
+    \end{itemize}
+\end{sloppypar}
+
+The scraping process resulted in a total of 191 raw images collected in the \path{task1_image_retrieval/data/indonesian/images} directory, covering various vehicle types: Pickups, Trucks, Buses, SUVs, and MPVs.
+
+\subsubsection{Object Cropping (GroundingDINO)}
+Raw web images often contain significant background noise or multiple objects, which can confuse a classification model. To address this, I implemented an automated cropping pipeline, \texttt{run\_cropping.py} (\href{https://github.com/alifwr/pnu-infosec-challenge/blob/main/task1_image_retrieval/scripts/run_cropping.py}{\path{task1_image_retrieval/scripts/run\_cropping.py}}).
+
+Instead of training a detector from scratch, this pipeline leverages \textbf{GroundingDINO}, a state-of-the-art open-set object detector. The process is as follows:
+\begin{itemize}
+    \item \textbf{Detection}: The model scans each downloaded image using the text prompt ``vehicle''. This zero-shot approach allows it to robustly identify vehicles without needing a specific trained class for every variant.
+    \item \textbf{Filtering}: Detections are filtered using a box confidence threshold of 0.35 to remove low-confidence predictions.
+    \item \textbf{Extraction}: The pipeline extracts the class label directly from the source filename (parsed from the scraper's output) and associates it with the detected bounding box.
+    \item \textbf{Cropping}: The region of interest defined by the bounding box is cropped and saved as a new image. Crops smaller than $32 \times 32$ pixels are discarded to maintain dataset quality.
+\end{itemize}
+
+This process transforms noisy internet search results into a clean, object-centric dataset where the vehicle is the primary subject. The pipeline successfully generated 274 cropped vehicle images, stored in \path{task1_image_retrieval/data/indonesian/cropped}, which served as the training data for the classification model. Figure~\ref{fig:creation_pipeline} demonstrates this pipeline, showing representative examples for each vehicle class: Pickup, Truck, Bus, SUV, and MPV.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/sample_pickup_combined.jpg}
+    \caption{Pickup Example: Raw vs. Cropped}
+    \label{fig:pickup_sample}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/sample_truck_combined.jpg}
+    \caption{Truck Example: Raw vs. Cropped}
+    \label{fig:truck_sample}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/sample_bus_combined.jpg}
+    \caption{Bus Example: Raw vs. Cropped}
+    \label{fig:bus_sample}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/sample_suv_combined.jpg}
+    \caption{SUV Example: Raw vs. Cropped}
+    \label{fig:suv_sample}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/sample_mpv_combined.jpg}
+    \caption{MPV Example: Raw vs. Cropped}
+    \label{fig:mpv_sample}
+\end{figure}
+
 \subsection{Model Selection}
 
 \subsection{Training \& Evaluation}
