@@ -20,7 +20,7 @@ This module implements a complete pipeline for analyzing vehicle traffic from vi
 
 ### Demo Output
 
-[![Task 1 Demo](https://img.youtube.com/vi/IU14XfCYmOo/0.jpg)](https://youtu.be/IU14XfCYmOo)
+[![Task 1 Demo](https://img.youtube.com/vi/IU14XfCYmOo/0.jpg)](https://www.youtube.com/watch?v=IU14XfCYmOo&autoplay=1)
 
 ### Pipeline Overview
 
