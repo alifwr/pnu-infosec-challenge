@@ -12,6 +12,9 @@ import sys
 import pandas as pd
 import time
 import wandb
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.metrics import confusion_matrix, classification_report
 
 sys.path.append(str(Path(__file__).parent.parent))
 
@@ -30,6 +33,45 @@ from utils.training_utilities import (
     save_checkpoint,
 )
 from models.arcface import VehicleClassifier
+
+
+def plot_confusion_matrix(cm, class_names, output_path):
+    """Plot and save confusion matrix"""
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(
+        cm,
+        annot=True,
+        fmt="d",
+        cmap="Blues",
+        xticklabels=class_names,
+        yticklabels=class_names,
+    )
+    plt.ylabel("True Label")
+    plt.xlabel("Predicted Label")
+    plt.title("Confusion Matrix")
+    plt.tight_layout()
+    plt.savefig(output_path)
+    plt.close()
+
+
+def plot_training_history(history, output_path):
+    """Plot and save training history"""
+    train_losses = history["train_losses"]
+    # If val_losses exists in history, plot them too, otherwise just train
+    val_losses = history.get("val_losses", [])
+
+    plt.figure(figsize=(10, 5))
+    plt.plot(train_losses, label="Train Loss")
+    if val_losses:
+        plt.plot(val_losses, label="Validation Loss")
+    plt.xlabel("Epoch")
+    plt.ylabel("Loss")
+    plt.title("Training History")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.savefig(output_path)
+    plt.close()
 
 
 def train_model(backbone_name, base_config):
@@ -167,6 +209,7 @@ def train_model(backbone_name, base_config):
     # Training loop
     best_acc = 0.0
     train_losses = []
+    val_losses = []
 
     print("\n" + "-" * 60)
     print(f"Start Training for {backbone_name}")
@@ -185,6 +228,7 @@ def train_model(backbone_name, base_config):
 
         # Validation Loss
         val_loss = validate_loss(model, gallery_loader, criterion, config["device"])
+        val_losses.append(val_loss)
 
         print(
             f"Epoch {epoch + 1}/{config['num_epochs']} - Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}, LR: {current_lr:.6f}"
@@ -264,25 +308,72 @@ def train_model(backbone_name, base_config):
             )
 
     # Save training history
-    history = {"train_losses": train_losses, "best_acc": best_acc}
+    history = {
+        "train_losses": train_losses,
+        "val_losses": val_losses,
+        "best_acc": best_acc,
+    }
     with open(os.path.join(config["output_dir"], "training_history.json"), "w") as f:
         json.dump(history, f, indent=4)
+
+    # Plot history
+    plot_training_history(
+        history, os.path.join(config["output_dir"], "training_history.png")
+    )
+
+    # ---------------------------------------------------------
+    # Detailed Report (Confusion Matrix & Classification Report)
+    # ---------------------------------------------------------
+    print("\nGenerating Detailed Report...")
+
+    # Load best model for reporting
+    best_model_path = os.path.join(config["output_dir"], "best_model.pth")
+    if os.path.exists(best_model_path):
+        try:
+            checkpoint = torch.load(best_model_path)
+            model.load_state_dict(checkpoint["model_state_dict"])
+            print("Loaded best model for detailed reporting.")
+        except RuntimeError as e:
+            print(f"Warning: Could not load best_model.pth: {e}")
+
+    # Re-build gallery with best model (important as embeddings depend on weights)
+    gallery_prototypes, gallery_embeddings = build_gallery(
+        model, gallery_loader, config["device"], train_dataset.idx_to_label
+    )
+
+    # Evaluate on test set
+    test_acc, preds, labels = evaluate(
+        model,
+        test_loader,
+        gallery_prototypes,
+        config["device"],
+        train_dataset.idx_to_label,
+        train_dataset.label_to_idx,
+    )
+
+    # Generate Confusion Matrix
+    cm = confusion_matrix(labels, preds)
+    plot_confusion_matrix(
+        cm,
+        train_dataset.vehicle_types,
+        os.path.join(config["output_dir"], "confusion_matrix.png"),
+    )
+
+    # Generate Classification Report
+    cls_report = classification_report(
+        labels, preds, target_names=train_dataset.vehicle_types, output_dict=True
+    )
+    df_report = pd.DataFrame(cls_report).transpose()
+    df_report.to_csv(os.path.join(config["output_dir"], "classification_report.csv"))
+
+    print(f"Detailed reports saved to {config['output_dir']}")
 
     # ---------------------------------------------------------
     # Benchmarking
     # ---------------------------------------------------------
     print("\nRunning Benchmark...")
 
-    # Load best model for benchmarking
-    best_model_path = os.path.join(config["output_dir"], "best_model.pth")
-    if os.path.exists(best_model_path):
-        try:
-            checkpoint = torch.load(best_model_path)
-            model.load_state_dict(checkpoint["model_state_dict"])
-            print("Loaded best model for benchmarking.")
-        except RuntimeError as e:
-            print(f"Warning: Could not load best_model.pth: {e}")
-
+    # Model is already loaded with best weights from above block.
     model.eval()
 
     # Measure inference time

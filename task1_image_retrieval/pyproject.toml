@@ -13,6 +13,8 @@ dependencies = [
     "playwright>=1.57.0",
     "pyyaml>=6.0.3",
     "requests>=2.32.5",
+    "scikit-learn>=1.8.0",
+    "seaborn>=0.13.2",
     "ultralytics>=8.3.246",
     "wandb>=0.23.1",
 ]
