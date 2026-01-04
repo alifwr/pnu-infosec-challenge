@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 0 "main.bcf" "main.bbl" "main" 1767484829.42638 -1
-  "main.bcf" 1767484829.35742 107150 8206b2240db7184a413b8182089fca81 "pdflatex"
+["biber main"] 0 "main.bcf" "main.bbl" "main" 1767484971.68804 -1
+  "main.bcf" 1767484971.62817 107150 8206b2240db7184a413b8182089fca81 "pdflatex"
   "references.bib" 1766640892.38593 1116 3b656fd4f77c1fae9da21730ffad43fc ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1767484826.84607 "/home/alif/pnu/report/main.tex" "main.pdf" "main" 1767484829.4266 0
+["pdflatex"] 1767484969.13042 "/home/alif/pnu/report/main.tex" "main.pdf" "main" 1767484971.68828 0
   "/etc/texmf/web2c/texmf.cnf" 1766015017.74193 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/alif/pnu/report/main.tex" 1767368865.23756 492 53a59006d7950432199e1312e7f4092b ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -144,7 +144,7 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1766059583.22169 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1766059662 8212680 2f04877e65e950740ab8abae156f90f2 ""
-  "chapters/02_image_task.tex" 1767484826.63037 16599 286cb48d2745f7c8bb8924048e8b0eab ""
+  "chapters/02_image_task.tex" 1767484966.31705 16695 4b1a119d7de6263e95341183b43dc3fc ""
   "chapters/03_llm_rag_task.tex" 1766668072.63 17120 bb2aeea5fa4e622ceceae17332343e4d ""
   "chapters/04_adversarial_bonus.tex" 1766532587.35211 338 cd0ab905d4e57acdebca5b53c5c9be9c ""
   "chapters/05_conclusion.tex" 1766532587.3522 160 d379c2fce0338f70cfffe7496d3a679a ""
@@ -158,12 +158,12 @@
   "figures/yolo10l_confusion_matrix.png" 1767484320.71489 92847 cb00391a612edd6057caedc7ce887d80 ""
   "figures/yolo_loss.png" 1767482299.77249 37148 518b3aa4aed32e184a5b8f1509041f11 ""
   "figures/yolov10.png" 1767482299.77312 145585 917fecf4228885f260c14c24d859cbcf ""
-  "main.aux" 1767484829.35542 9154 c9773d8f729087b27383c8474abac548 "pdflatex"
+  "main.aux" 1767484971.62663 9543 32807921a989c08d6d9a311c9161a5cb "pdflatex"
   "main.bbl" 1767483542.06101 466 ee04f40f768daeed26442158e95aba61 "biber main"
-  "main.out" 1767484829.35642 3466 f0f5711b0363ccd169d3618cb1f13578 "pdflatex"
-  "main.run.xml" 1767484829.35865 2402 7c866ed2192e71c57464ed4279aadefa "pdflatex"
+  "main.out" 1767484971.62663 3927 f8503de06b10380b4d4e94e7a8c2768e "pdflatex"
+  "main.run.xml" 1767484971.6292 2402 7c866ed2192e71c57464ed4279aadefa "pdflatex"
   "main.tex" 1767368865.23756 492 53a59006d7950432199e1312e7f4092b ""
-  "main.toc" 1767484829.35865 2836 18b9c38911abadea3b671693693a72d1 "pdflatex"
+  "main.toc" 1767484971.6292 3102 0fe1d83c43771c1df3f69b1f32e7d864 "pdflatex"
   "preamble.tex" 1767482299.78161 1471 d3a9a7305652acc198404ee852c5bee0 ""
   (generated)
   "main.aux"
