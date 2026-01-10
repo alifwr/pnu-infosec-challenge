@@ -1,11 +1,11 @@
 # Fdb version 4
-["biber main"] 1768057040.08909 "main.bcf" "main.bbl" "main" 1768057192.33618 0
-  "main.bcf" 1768057191 107802 cdad34f79b68837074b1d297a7e1b38e "pdflatex"
+["biber main"] 1768058761.70786 "main.bcf" "main.bbl" "main" 1768058798.67523 0
+  "main.bcf" 1768058798 107802 cdad34f79b68837074b1d297a7e1b38e "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1768057184.46517 "c:/Users/ACER/OneDrive/Documents/Kerja/self/pnu-infosec-challenge/report/main.tex" "main.pdf" "main" 1768057192.33749 0
+["pdflatex"] 1768058790.42599 "c:/Users/ACER/OneDrive/Documents/Kerja/self/pnu-infosec-challenge/report/main.tex" "main.pdf" "main" 1768058798.67634 0
   "C:/Users/ACER/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1767474157 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/ACER/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1200.pk" 1766411840 31952 adc1dd22f1945256011eb5c2be91fd13 ""
   "C:/Users/ACER/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1440.pk" 1766411830 40136 4190676bab121687a646983a6076ac52 ""
@@ -135,13 +135,14 @@
   "C:/Users/ACER/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "C:/Users/ACER/AppData/Local/Programs/MiKTeX/tex/latex/xurl/xurl.sty" 1641733940 4675 e4b8c405820368c2dfb03526e16d725a ""
   "c:/Users/ACER/OneDrive/Documents/Kerja/self/pnu-infosec-challenge/report/main.tex" 1768057027 522 b26ef7b0d90fdd38849308fa566b1e39 ""
-  "chapters/02_image_task.tex" 1768057183 30904 8af5e9c9d8342429746b77944b2fc0c8 ""
+  "chapters/02_image_task.tex" 1768058760 31127 db2952a44501b75d0d888d1469a6ec8f ""
   "chapters/03_llm_rag_task.tex" 1766807709 17303 bb2aeea5fa4e622ceceae17332343e4d ""
   "figures/classifier_train_loss.png" 1768057027 23911 4cacb20dba8a776180c604867875c0fc ""
   "figures/classifier_val_loss.png" 1768057027 27887 51980d4013565335c793b646e569fd97 ""
   "figures/cm_efficientnet.png" 1768057027 40026 9268386569c74d368eadfd3bc4578cee ""
   "figures/cm_swin.png" 1768057027 40452 3a511f8a29b248d712f465e0a4e304b2 ""
   "figures/cropping_pipeline.png" 1768057027 943379 be59cdcdefc35ec244be7bef4a998239 ""
+  "figures/dataset_creation_pipeline.png" 1768055798 1223712 0f1c91391e3e8c80ff4537750802c1ac ""
   "figures/dataset_sample.jpg" 1768057027 631641 7cb286e33c207124fe37e90055b79b6d ""
   "figures/detr_loss.png" 1767455167 48553 645d412e7d17d3857717d21416d4e8f8 ""
   "figures/llm_integration_pipeline.png" 1766807661 950234 193ae61a305610cdc6d37837857cdd6c ""
@@ -157,12 +158,12 @@
   "figures/yolo10l_confusion_matrix.png" 1768057027 92847 a1a276f3d4f2014683188a75a644e85b ""
   "figures/yolo_loss.png" 1767455218 37148 110aa49af36ef910efb9d9bd033bd71d ""
   "figures/yolov10.png" 1767436052 145585 004e4794c7297c05bb4895d1b9beead6 ""
-  "main.aux" 1768057191 12281 e180658468918335287c3bebaaa3b0e2 "pdflatex"
-  "main.bbl" 1768057043 486 76d65a242ec496c9b4361af646ff12cb "biber main"
-  "main.out" 1768057191 3329 2bf681b2cc5b2deac421e93ef0e8a4f9 "pdflatex"
-  "main.run.xml" 1768057191 2402 05765085d18e81025e591027ecbce8c4 "pdflatex"
+  "main.aux" 1768058798 12526 3a72523395067e88f9f6a72822875bac "pdflatex"
+  "main.bbl" 1768058764 486 76d65a242ec496c9b4361af646ff12cb "biber main"
+  "main.out" 1768058798 3329 2bf681b2cc5b2deac421e93ef0e8a4f9 "pdflatex"
+  "main.run.xml" 1768058798 2402 05765085d18e81025e591027ecbce8c4 "pdflatex"
   "main.tex" 1768057027 522 b26ef7b0d90fdd38849308fa566b1e39 ""
-  "main.toc" 1768057191 3144 5587dce675f6791d102ab885bf1daf79 "pdflatex"
+  "main.toc" 1768058798 3132 b304e4a6189d0e836763c5a3a29857e6 "pdflatex"
   "preamble.tex" 1767478499 1535 d3a9a7305652acc198404ee852c5bee0 ""
   (generated)
   "main.aux"

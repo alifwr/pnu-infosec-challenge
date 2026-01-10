@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.18)  10 JAN 2026 21:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.18)  10 JAN 2026 22:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -692,66 +692,225 @@ l.15 \newpage
 
 ] (chapters/02_image_task.tex
 Chapter 1.
+<figures/dataset_creation_pipeline.png, id=123, 5410.2125pt x 2436.10126pt>
+File: figures/dataset_creation_pipeline.png Graphic file (type png)
+<use figures/dataset_creation_pipeline.png>
+Package pdftex.def Info: figures/dataset_creation_pipeline.png  used on input line 14.
+(pdftex.def)             Requested size: 407.66833pt x 183.55466pt.
 [2
 
-]
-<figures/yolov10.png, id=137, 549.05125pt x 195.73125pt>
-File: figures/yolov10.png Graphic file (type png)
-<use figures/yolov10.png>
-Package pdftex.def Info: figures/yolov10.png  used on input line 47.
-(pdftex.def)             Requested size: 452.9679pt x 161.48325pt.
- [4
+
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.44 
-      <./figures/yolov10.png>]
-<figures/rt-detr.png, id=149, 929.4725pt x 318.18875pt>
-File: figures/rt-detr.png Graphic file (type png)
-<use figures/rt-detr.png>
-Package pdftex.def Info: figures/rt-detr.png  used on input line 59.
-(pdftex.def)             Requested size: 452.9679pt x 155.06418pt.
- [5
+l.22 
+      <./figures/dataset_creation_pipeline.png>]
+<figures/dataset_sample.jpg, id=135, 1927.2pt x 1927.2pt>
+File: figures/dataset_sample.jpg Graphic file (type jpg)
+<use figures/dataset_sample.jpg>
+Package pdftex.def Info: figures/dataset_sample.jpg  used on input line 41.
+(pdftex.def)             Requested size: 452.9679pt x 452.95088pt.
+ [3]
+<figures/yolov10.png, id=146, 549.05125pt x 195.73125pt>
+File: figures/yolov10.png Graphic file (type png)
+<use figures/yolov10.png>
+Package pdftex.def Info: figures/yolov10.png  used on input line 54.
+(pdftex.def)             Requested size: 452.9679pt x 161.48325pt.
+ [4
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.66     \item \textbf
-                      {Image Size}: $640 \times 640$ pixels <./figures/rt-detr.png>]
-<figures/yolo_loss.png, id=160, 714.2685pt x 216.81pt>
-File: figures/yolo_loss.png Graphic file (type png)
-<use figures/yolo_loss.png>
-Package pdftex.def Info: figures/yolo_loss.png  used on input line 82.
-(pdftex.def)             Requested size: 452.9679pt x 137.49747pt.
- [6
+l.58 
+      <./figures/dataset_sample.jpg>]
+<figures/rt-detr.png, id=152, 929.4725pt x 318.18875pt>
+File: figures/rt-detr.png Graphic file (type png)
+<use figures/rt-detr.png>
+Package pdftex.def Info: figures/rt-detr.png  used on input line 66.
+(pdftex.def)             Requested size: 452.9679pt x 155.06418pt.
+ [5
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.72 
+     
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.102 
-       <./figures/yolo_loss.png>] [6]
-<figures/detr_loss.png, id=189, 712.46175pt x 215.00325pt>
-File: figures/detr_loss.png Graphic file (type png)
-<use figures/detr_loss.png>
-Package pdftex.def Info: figures/detr_loss.png  used on input line 162.
-(pdftex.def)             Requested size: 452.9679pt x 136.69614pt.
- [8
+l.72 
+      <./figures/yolov10.png> <./figures/rt-detr.png>]
+<figures/yolo_loss.png, id=164, 714.2685pt x 216.81pt>
+File: figures/yolo_loss.png Graphic file (type png)
+<use figures/yolo_loss.png>
+Package pdftex.def Info: figures/yolo_loss.png  used on input line 89.
+(pdftex.def)             Requested size: 452.9679pt x 137.49747pt.
+ [6
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.191 \end{equation}
-                     <./figures/detr_loss.png>]
-<figures/training_metrics.png, id=205, 714.2685pt x 428.802pt>
-File: figures/training_metrics.png Graphic file (type png)
-<use figures/training_metrics.png>
-Package pdftex.def Info: figures/training_metrics.png  used on input line 218.
-(pdftex.def)             Requested size: 452.9679pt x 271.93947pt.
- [9] [10
+l.97 
+      <./figures/yolo_loss.png>] [7]
+<figures/detr_loss.png, id=193, 712.46175pt x 215.00325pt>
+File: figures/detr_loss.png Graphic file (type png)
+<use figures/detr_loss.png>
+Package pdftex.def Info: figures/detr_loss.png  used on input line 169.
+(pdftex.def)             Requested size: 452.9679pt x 136.69614pt.
+ [8
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.215 
-       <./figures/training_metrics.png>]) (chapters/03_llm_rag_task.tex [9]
+l.185     \item $
+                 TP$: True Positives. <./figures/detr_loss.png>]
+<figures/training_metrics.png, id=210, 714.2685pt x 428.802pt>
+File: figures/training_metrics.png Graphic file (type png)
+<use figures/training_metrics.png>
+Package pdftex.def Info: figures/training_metrics.png  used on input line 225.
+(pdftex.def)             Requested size: 452.9679pt x 271.93947pt.
+ [9] [10
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.7}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.237 
+       <./figures/training_metrics.png>]
+<figures/yolo10l_confusion_matrix.png, id=226, 867.24pt x 650.43pt>
+File: figures/yolo10l_confusion_matrix.png Graphic file (type png)
+<use figures/yolo10l_confusion_matrix.png>
+Package pdftex.def Info: figures/yolo10l_confusion_matrix.png  used on input line 240.
+(pdftex.def)             Requested size: 452.9679pt x 339.72418pt.
+<figures/rtdetr_l_confusion_matrix.png, id=227, 867.24pt x 650.43pt>
+File: figures/rtdetr_l_confusion_matrix.png Graphic file (type png)
+<use figures/rtdetr_l_confusion_matrix.png>
+Package pdftex.def Info: figures/rtdetr_l_confusion_matrix.png  used on input line 247.
+(pdftex.def)             Requested size: 452.9679pt x 339.72418pt.
+ [11
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.8}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.251 
+       <./figures/yolo10l_confusion_matrix.png>] [12
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.9}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.267     \end{itemize}
+                        <./figures/rtdetr_l_confusion_matrix.png>]
+<figures/cropping_pipeline.png, id=248, 2715.14375pt x 4713.61pt>
+File: figures/cropping_pipeline.png Graphic file (type png)
+<use figures/cropping_pipeline.png>
+Package pdftex.def Info: figures/cropping_pipeline.png  used on input line 287.
+(pdftex.def)             Requested size: 362.37569pt x 629.04561pt.
+ [13]
+<figures/sample_pickup_combined.jpg, id=259, 863.225pt x 341.275pt>
+File: figures/sample_pickup_combined.jpg Graphic file (type jpg)
+<use figures/sample_pickup_combined.jpg>
+Package pdftex.def Info: figures/sample_pickup_combined.jpg  used on input line 294.
+(pdftex.def)             Requested size: 362.37569pt x 143.26161pt.
+ [14
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.10}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.298 
+       <./figures/cropping_pipeline.png>]
+<figures/sample_truck_combined.jpg, id=265, 863.225pt x 341.275pt>
+File: figures/sample_truck_combined.jpg Graphic file (type jpg)
+<use figures/sample_truck_combined.jpg>
+Package pdftex.def Info: figures/sample_truck_combined.jpg  used on input line 301.
+(pdftex.def)             Requested size: 362.37569pt x 143.26161pt.
+<figures/sample_bus_combined.jpg, id=266, 863.225pt x 341.275pt>
+File: figures/sample_bus_combined.jpg Graphic file (type jpg)
+<use figures/sample_bus_combined.jpg>
+Package pdftex.def Info: figures/sample_bus_combined.jpg  used on input line 308.
+(pdftex.def)             Requested size: 362.37569pt x 143.26161pt.
+<figures/sample_suv_combined.jpg, id=267, 863.225pt x 341.275pt>
+File: figures/sample_suv_combined.jpg Graphic file (type jpg)
+<use figures/sample_suv_combined.jpg>
+Package pdftex.def Info: figures/sample_suv_combined.jpg  used on input line 315.
+(pdftex.def)             Requested size: 362.37569pt x 143.26161pt.
+ [15
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.11}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.319 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.12}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.319 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.13}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.319 
+       <./figures/sample_pickup_combined.jpg> <./figures/sample_truck_combined.jpg> <./figures/sample_bus_combined.jpg>]
+<figures/sample_mpv_combined.jpg, id=272, 863.225pt x 341.275pt>
+File: figures/sample_mpv_combined.jpg Graphic file (type jpg)
+<use figures/sample_mpv_combined.jpg>
+Package pdftex.def Info: figures/sample_mpv_combined.jpg  used on input line 322.
+(pdftex.def)             Requested size: 362.37569pt x 143.26161pt.
+ [16
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.14}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.343 \end{itemize}
+                   
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.15}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.343 \end{itemize}
+                    <./figures/sample_suv_combined.jpg> <./figures/sample_mpv_combined.jpg>] [17]
+<figures/classifier_train_loss.png, id=290, 681.54625pt x 388.45125pt>
+File: figures/classifier_train_loss.png Graphic file (type png)
+<use figures/classifier_train_loss.png>
+Package pdftex.def Info: figures/classifier_train_loss.png  used on input line 408.
+(pdftex.def)             Requested size: 362.37569pt x 206.54202pt.
+ [18
+pdfTeX warning (ext4): destination with the same identifier (name{table.1.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.412 
+      ]
+<figures/classifier_val_loss.png, id=301, 681.54625pt x 388.45125pt>
+File: figures/classifier_val_loss.png Graphic file (type png)
+<use figures/classifier_val_loss.png>
+Package pdftex.def Info: figures/classifier_val_loss.png  used on input line 415.
+(pdftex.def)             Requested size: 362.37569pt x 206.54202pt.
+ [19
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.16}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.423 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.17}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.423 
+       <./figures/classifier_train_loss.png> <./figures/classifier_val_loss.png>]
+<figures/cm_efficientnet.png, id=310, 722.7pt x 578.16pt>
+File: figures/cm_efficientnet.png Graphic file (type png)
+<use figures/cm_efficientnet.png>
+Package pdftex.def Info: figures/cm_efficientnet.png  used on input line 431.
+(pdftex.def)             Requested size: 217.42265pt x 173.93454pt.
+<figures/cm_swin.png, id=311, 722.7pt x 578.16pt>
+File: figures/cm_swin.png Graphic file (type png)
+<use figures/cm_swin.png>
+Package pdftex.def Info: figures/cm_swin.png  used on input line 437.
+(pdftex.def)             Requested size: 217.42265pt x 173.93454pt.
+) (chapters/03_llm_rag_task.tex [20
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.18}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1 \chapter
+            {Task 2: RAG Pipeline (LLM Task)}
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.19}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1 \chapter
+            {Task 2: RAG Pipeline (LLM Task)}
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.20}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1 \chapter
+            {Task 2: RAG Pipeline (LLM Task)} <./figures/cm_efficientnet.png> <./figures/cm_swin.png>]
 Chapter 2.
-<figures/rag_pipeline.png, id=218, 5427.27625pt x 3612.49625pt>
+<figures/rag_pipeline.png, id=322, 5427.27625pt x 3612.49625pt>
 File: figures/rag_pipeline.png Graphic file (type png)
 <use figures/rag_pipeline.png>
 Package pdftex.def Info: figures/rag_pipeline.png  used on input line 11.
@@ -764,7 +923,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1}) h
                                                   \__shipout_drop_firstpage_...
 l.17 
       <./figures/rag_pipeline.png>]
-<figures/llm_integration_pipeline.png, id=228, 4352.26pt x 5181.3575pt>
+<figures/llm_integration_pipeline.png, id=332, 4352.26pt x 5181.3575pt>
 File: figures/llm_integration_pipeline.png Graphic file (type png)
 <use figures/llm_integration_pipeline.png>
 Package pdftex.def Info: figures/llm_integration_pipeline.png  used on input line 36.
@@ -807,20 +966,8 @@ l.26 \end{document}
 pdfTeX warning (ext4): destination with the same identifier (name{table.2.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1 \chapter
-            {Bonus Task: Adversarial Attacks}]
-Chapter 3.
-) (chapters/05_conclusion.tex [17
-
-]
-Chapter 4.
-)
-
-LaTeX Warning: Empty bibliography on input line 24.
-
-[18
-
-] (main.aux)
+l.26 \end{document}
+                   ] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
@@ -832,17 +979,17 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 19952 strings out of 467871
- 343171 string characters out of 5418859
- 1206720 words of memory out of 5000000
- 48526 multiletter control sequences out of 15000+600000
+ 20086 strings out of 467871
+ 346935 string characters out of 5418859
+ 1207699 words of memory out of 5000000
+ 48634 multiletter control sequences out of 15000+600000
  643327 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,12n,82p,1266b,807s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 80i,11n,82p,1266b,807s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\ACER\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\ACER\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1200.pk> <C:\Users\ACER\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\ACER\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\ACER\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\ACER\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk> <C:\Users\ACER\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\ACER\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\ACER\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk><C:/Users/ACER/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/ACER/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/ACER/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/ACER/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/ACER/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/ACER/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/ACER/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/ACER/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ACER/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on main.pdf (19 pages, 1581218 bytes).
+Output written on main.pdf (28 pages, 4213745 bytes).
 PDF statistics:
- 710 PDF objects out of 1000 (max. 8388607)
- 64 named destinations out of 1000 (max. 500000)
- 212 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 811 PDF objects out of 1000 (max. 8388607)
+ 96 named destinations out of 1000 (max. 500000)
+ 274 words of extra memory for PDF output out of 10000 (max. 10000000)
 

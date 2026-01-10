@@ -9,6 +9,13 @@ This chapter described about the Image Task from the Admission Test. The Image T
 
 To accomplish the object detection task effectively given the time constraints, I employed a semi-automated data pipeline. This pipeline consisted of two main stages: automated video acquisition and zero-shot auto-labelling using a foundational model (Teacher-Student approach).
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/dataset_creation_pipeline.png}
+    \caption{Semi-Automated Dataset Creation Pipeline}
+    \label{fig:dataset_pipeline}
+\end{figure}
+
 \subsubsection{Video Acquisition}
 \begin{sloppypar}
     The initial dataset was sourced from public CCTV footage available on YouTube to simulate real-world surveillance scenarios. I developed a custom Python script, \texttt{download\_youtube.py} (\href{https://github.com/alifwr/pnu-infosec-challenge/blob/main/task1_image_retrieval/scripts/download_youtube.py}{\path{task1_image_retrieval/scripts/download\_youtube.py}}), which utilizes the \texttt{yt-dlp} library. This script ensures high-quality data ingestion by prioritizing video streams with a resolution of 1080p or lower, encoded in H.264 (\texttt{avc1}) within an MP4 container. This specific format selection ensures maximum compatibility with subsequent processing tools (OpenCV) without distinct quality loss.

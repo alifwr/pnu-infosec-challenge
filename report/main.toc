@@ -1,13 +1,13 @@
 \contentsline {chapter}{\numberline {1}Task 1: Computer Vision (Image Task)}{2}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Object Detection}{2}{section.1.1}%
 \contentsline {subsection}{\numberline {1.1.1}Dataset Creation}{2}{subsection.1.1.1}%
-\contentsline {subsubsection}{Video Acquisition}{2}{subsection.1.1.1}%
-\contentsline {subsubsection}{Automated Annotation (Teacher-Student Method)}{2}{subsection.1.1.1}%
+\contentsline {subsubsection}{Video Acquisition}{2}{figure.1.1}%
+\contentsline {subsubsection}{Automated Annotation (Teacher-Student Method)}{3}{figure.1.1}%
 \contentsline {subsection}{\numberline {1.1.2}Model Selection}{4}{subsection.1.1.2}%
 \contentsline {subsubsection}{YOLOv10}{5}{subsection.1.1.2}%
-\contentsline {subsubsection}{RT-DETR}{5}{figure.1.2}%
+\contentsline {subsubsection}{RT-DETR}{5}{figure.1.3}%
 \contentsline {subsection}{\numberline {1.1.3}Training \& Evaluation}{6}{subsection.1.1.3}%
-\contentsline {subsubsection}{Box Loss (CIoU Loss)}{7}{figure.1.4}%
+\contentsline {subsubsection}{Box Loss (CIoU Loss)}{7}{figure.1.5}%
 \contentsline {subsubsection}{Distribution Focal Loss (DFL)}{7}{equation.1.1}%
 \contentsline {subsubsection}{L1 Loss}{7}{equation.1.2}%
 \contentsline {subsubsection}{GIoU Loss}{8}{equation.1.3}%
