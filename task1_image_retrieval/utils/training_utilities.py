@@ -81,6 +81,23 @@ def train_epoch(model, train_loader, criterion, optimizer, device, epoch, scaler
     return losses.avg
 
 
+def validate_loss(model, val_loader, criterion, device):
+    """Compute validation loss"""
+    model.eval()
+    losses = AverageMeter()
+
+    with torch.no_grad():
+        for images, labels in tqdm(val_loader, desc="Validating Loss", leave=False):
+            images = images.to(device)
+            labels = labels.to(device)
+
+            logits, _ = model(images, labels)
+            loss = criterion(logits, labels)
+            losses.update(loss.item(), images.size(0))
+
+    return losses.avg
+
+
 def build_gallery(model, gallery_loader, device, idx_to_label):
     """Build gallery prototypes from gallery set"""
     model.eval()

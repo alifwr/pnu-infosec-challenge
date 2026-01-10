@@ -59,6 +59,11 @@ class FlatStructureTankDataset(Dataset):
             class_name = "_".join(class_parts)
             class_to_images[class_name].append(img_path)
 
+        # Build consistent label mapping from ALL classes found
+        self.vehicle_types = sorted(list(class_to_images.keys()))
+        self.label_to_idx = {label: idx for idx, label in enumerate(self.vehicle_types)}
+        self.idx_to_label = {idx: label for label, idx in self.label_to_idx.items()}
+
         # Create train/gallery/test splits
         np.random.seed(seed)
         self.samples = []
@@ -84,10 +89,8 @@ class FlatStructureTankDataset(Dataset):
             for img_path in selected:
                 self.samples.append({"image_path": img_path, "label": class_name})
 
-        # Build label mapping
-        self.tank_types = sorted(list(set([s["label"] for s in self.samples])))
-        self.label_to_idx = {label: idx for idx, label in enumerate(self.tank_types)}
-        self.idx_to_label = {idx: label for label, idx in self.label_to_idx.items()}
+        # Label mapping is now pre-computed to ensure consistency across splits
+        # self.vehicle_types, self.label_to_idx are already set above
 
         # Add label indices to samples
         for sample in self.samples:
@@ -96,7 +99,7 @@ class FlatStructureTankDataset(Dataset):
         print(f"\n{'=' * 60}")
         print(f"Mode: {mode.upper()}")
         print(f"Total samples: {len(self.samples)}")
-        print(f"Classes: {len(self.tank_types)}")
+        print(f"Classes: {len(self.vehicle_types)}")
         print(f"{'=' * 60}")
         self._print_class_distribution()
 

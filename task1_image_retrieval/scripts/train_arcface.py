@@ -9,6 +9,12 @@ import yaml
 from pathlib import Path
 import numpy as np
 import sys
+import pandas as pd
+import time
+import wandb
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.metrics import confusion_matrix, classification_report
 
 sys.path.append(str(Path(__file__).parent.parent))
 
@@ -21,46 +27,90 @@ from utils.dataset import (
 )
 from utils.training_utilities import (
     train_epoch,
+    validate_loss,
     evaluate,
     build_gallery,
     save_checkpoint,
 )
-from models.arcface import TankClassifier
+from models.arcface import VehicleClassifier
 
 
-def main():
-    # Load config from YAML file
-    config_path = os.path.join(
-        str(Path(__file__).parent.parent), "configs", "arcface_config.yaml"
+def plot_confusion_matrix(cm, class_names, output_path):
+    """Plot and save confusion matrix"""
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(
+        cm,
+        annot=True,
+        fmt="d",
+        cmap="Blues",
+        xticklabels=class_names,
+        yticklabels=class_names,
     )
-    with open(config_path, "r") as f:
-        config = yaml.safe_load(f)
+    plt.ylabel("True Label")
+    plt.xlabel("Predicted Label")
+    plt.title("Confusion Matrix")
+    plt.tight_layout()
+    plt.savefig(output_path)
+    plt.close()
 
-    # Add device (computed at runtime)
-    config["device"] = "cuda" if torch.cuda.is_available() else "cpu"
 
-    # Create output directory
+def plot_training_history(history, output_path):
+    """Plot and save training history"""
+    train_losses = history["train_losses"]
+    # If val_losses exists in history, plot them too, otherwise just train
+    val_losses = history.get("val_losses", [])
+
+    plt.figure(figsize=(10, 5))
+    plt.plot(train_losses, label="Train Loss")
+    if val_losses:
+        plt.plot(val_losses, label="Validation Loss")
+    plt.xlabel("Epoch")
+    plt.ylabel("Loss")
+    plt.title("Training History")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.savefig(output_path)
+    plt.close()
+
+
+def train_model(backbone_name, base_config):
+    """
+    Trains and benchmarks a single model defined by backbone_name.
+    Returns a dictionary of benchmark results.
+    """
+    # Create a copy of config to avoid side effects
+    config = base_config.copy()
+    config["backbone"] = backbone_name
+
+    # Update output directory specific to this backbone
+    config["output_dir"] = os.path.join(base_config["output_dir"], backbone_name)
     os.makedirs(config["output_dir"], exist_ok=True)
 
     # Save config
     with open(os.path.join(config["output_dir"], "config.json"), "w") as f:
         json.dump(config, f, indent=4)
 
+    # Initialize wandb
+    try:
+        wandb.init(
+            project="vehicle_classification",
+            name=f"arcface_{config['backbone']}",
+            config=config,
+            reinit=True,
+        )
+        print(f"Logged into WandB successfully for {backbone_name}.")
+    except Exception as e:
+        print(f"WandB init failed: {e}")
+        print("Continuing without WandB logging...")
+
     print("=" * 80)
-    print("TANK CLASSIFIER TRAINING PIPELINE")
+    print(f"TRAINING MODEL: {backbone_name}")
     print("=" * 80)
-    print("Configuration:")
-    for k, v in config.items():
-        print(f"  {k:20s}: {v}")
 
     # Set random seed
     torch.manual_seed(config["seed"])
     np.random.seed(config["seed"])
-
-    # Analyze dataset first
-    print("\n" + "=" * 80)
-    analyze_dataset(config["images_dir"])
-    print("=" * 80)
 
     # Create datasets
     print("\nCreating datasets...")
@@ -93,7 +143,7 @@ def main():
 
     # Save label mappings
     label_info = {
-        "tank_types": train_dataset.tank_types,
+        "vehicle_types": train_dataset.vehicle_types,
         "label_to_idx": train_dataset.label_to_idx,
         "idx_to_label": train_dataset.idx_to_label,
     }
@@ -127,9 +177,9 @@ def main():
     )
 
     # Create model
-    print(f"\nCreating model with {len(train_dataset.tank_types)} classes...")
-    model = TankClassifier(
-        num_classes=len(train_dataset.tank_types),
+    print(f"\nCreating model with {len(train_dataset.vehicle_types)} classes...")
+    model = VehicleClassifier(
+        num_classes=len(train_dataset.vehicle_types),
         embedding_size=config["embedding_size"],
         backbone=config["backbone"],
         pretrained=True,
@@ -138,9 +188,7 @@ def main():
 
     # Print model info
     total_params = sum(p.numel() for p in model.parameters())
-    trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
     print(f"Total parameters: {total_params:,}")
-    print(f"Trainable parameters: {trainable_params:,}")
 
     # Loss and optimizer
     criterion = nn.CrossEntropyLoss()
@@ -161,10 +209,11 @@ def main():
     # Training loop
     best_acc = 0.0
     train_losses = []
+    val_losses = []
 
-    print("\n" + "=" * 80)
-    print("TRAINING START")
-    print("=" * 80)
+    print("\n" + "-" * 60)
+    print(f"Start Training for {backbone_name}")
+    print("-" * 60)
 
     for epoch in range(config["num_epochs"]):
         # Train
@@ -177,9 +226,24 @@ def main():
         scheduler.step()
         current_lr = optimizer.param_groups[0]["lr"]
 
+        # Validation Loss
+        val_loss = validate_loss(model, gallery_loader, criterion, config["device"])
+        val_losses.append(val_loss)
+
         print(
-            f"Epoch {epoch + 1}/{config['num_epochs']} - Loss: {train_loss:.4f}, LR: {current_lr:.6f}"
+            f"Epoch {epoch + 1}/{config['num_epochs']} - Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}, LR: {current_lr:.6f}"
         )
+
+        # Log training metrics
+        if wandb.run:
+            wandb.log(
+                {
+                    "train_loss": train_loss,
+                    "val_loss": val_loss,
+                    "learning_rate": current_lr,
+                    "epoch": epoch + 1,
+                }
+            )
 
         # Evaluate every 10 epochs or at the end
         if (epoch + 1) % 10 == 0 or (epoch + 1) == config["num_epochs"]:
@@ -199,6 +263,10 @@ def main():
             )
 
             print(f"\nTest Accuracy: {test_acc:.4f}")
+
+            # Log validation metrics
+            if wandb.run:
+                wandb.log({"test_accuracy": test_acc, "epoch": epoch + 1})
 
             # Save best model
             if test_acc > best_acc:
@@ -224,7 +292,6 @@ def main():
                     },
                     os.path.join(config["output_dir"], "gallery.pth"),
                 )
-                print(f"New best model saved! Accuracy: {best_acc:.4f}")
 
         # Save checkpoint every 20 epochs
         if (epoch + 1) % 20 == 0:
@@ -240,29 +307,158 @@ def main():
                 f"checkpoint_epoch_{epoch + 1}.pth",
             )
 
-    # Save final model
-    save_checkpoint(
-        {
-            "epoch": config["num_epochs"],
-            "model_state_dict": model.state_dict(),
-            "optimizer_state_dict": optimizer.state_dict(),
-            "best_acc": best_acc,
-            "config": config,
-        },
-        config["output_dir"],
-        "final_model.pth",
-    )
-
     # Save training history
-    history = {"train_losses": train_losses, "best_acc": best_acc}
+    history = {
+        "train_losses": train_losses,
+        "val_losses": val_losses,
+        "best_acc": best_acc,
+    }
     with open(os.path.join(config["output_dir"], "training_history.json"), "w") as f:
         json.dump(history, f, indent=4)
 
+    # Plot history
+    plot_training_history(
+        history, os.path.join(config["output_dir"], "training_history.png")
+    )
+
+    # ---------------------------------------------------------
+    # Detailed Report (Confusion Matrix & Classification Report)
+    # ---------------------------------------------------------
+    print("\nGenerating Detailed Report...")
+
+    # Load best model for reporting
+    best_model_path = os.path.join(config["output_dir"], "best_model.pth")
+    if os.path.exists(best_model_path):
+        try:
+            checkpoint = torch.load(best_model_path)
+            model.load_state_dict(checkpoint["model_state_dict"])
+            print("Loaded best model for detailed reporting.")
+        except RuntimeError as e:
+            print(f"Warning: Could not load best_model.pth: {e}")
+
+    # Re-build gallery with best model (important as embeddings depend on weights)
+    gallery_prototypes, gallery_embeddings = build_gallery(
+        model, gallery_loader, config["device"], train_dataset.idx_to_label
+    )
+
+    # Evaluate on test set
+    test_acc, preds, labels = evaluate(
+        model,
+        test_loader,
+        gallery_prototypes,
+        config["device"],
+        train_dataset.idx_to_label,
+        train_dataset.label_to_idx,
+    )
+
+    # Generate Confusion Matrix
+    cm = confusion_matrix(labels, preds)
+    plot_confusion_matrix(
+        cm,
+        train_dataset.vehicle_types,
+        os.path.join(config["output_dir"], "confusion_matrix.png"),
+    )
+
+    # Generate Classification Report
+    cls_report = classification_report(
+        labels, preds, target_names=train_dataset.vehicle_types, output_dict=True
+    )
+    df_report = pd.DataFrame(cls_report).transpose()
+    df_report.to_csv(os.path.join(config["output_dir"], "classification_report.csv"))
+
+    print(f"Detailed reports saved to {config['output_dir']}")
+
+    # ---------------------------------------------------------
+    # Benchmarking
+    # ---------------------------------------------------------
+    print("\nRunning Benchmark...")
+
+    # Model is already loaded with best weights from above block.
+    model.eval()
+
+    # Measure inference time
+    total_images = 0
+    with torch.no_grad():
+        # Warmup
+        for i, (images, _) in enumerate(test_loader):
+            if i >= 5:
+                break
+            images = images.to(config["device"])
+            _ = model(images)
+
+        # Actual measurement
+        start_time = time.time()
+        for images, _ in test_loader:
+            images = images.to(config["device"])
+            _ = model(images)
+            total_images += images.size(0)
+        end_time = time.time()
+
+    inference_time_ms = (
+        ((end_time - start_time) / total_images) * 1000 if total_images > 0 else 0.0
+    )
+
+    # Model parameters
+    total_params_million = sum(p.numel() for p in model.parameters()) / 1e6
+
+    # Close wandb run for this model
+    if wandb.run:
+        wandb.finish()
+
+    return {
+        "Model": backbone_name,
+        "Accuracy": best_acc,
+        "Inference Time (ms)": round(inference_time_ms, 2),
+        "Parameters (M)": round(total_params_million, 2),
+    }
+
+
+def main():
+    # Load base config
+    config_path = os.path.join(
+        str(Path(__file__).parent.parent), "configs", "arcface_config.yaml"
+    )
+    with open(config_path, "r") as f:
+        config = yaml.safe_load(f)
+
+    # Add device
+    config["device"] = "cuda" if torch.cuda.is_available() else "cpu"
+
+    # Analyze dataset once
     print("\n" + "=" * 80)
-    print("TRAINING COMPLETE")
+    analyze_dataset(config["images_dir"])
     print("=" * 80)
-    print(f"Best Test Accuracy: {best_acc:.4f}")
-    print(f"Models saved to: {config['output_dir']}")
+
+    # Define backbones to train
+    backbones = ["efficientnet_b3", "swin_tiny_patch4_window7_224"]
+
+    all_results = []
+
+    for backbone in backbones:
+        try:
+            result = train_model(backbone, config)
+            all_results.append(result)
+        except Exception as e:
+            print(f"\nERROR: Training failed for {backbone}: {e}")
+            import traceback
+
+            traceback.print_exc()
+
+    # ---------------------------------------------------------
+    # Final Consolidated Report
+    # ---------------------------------------------------------
+    if all_results:
+        df = pd.DataFrame(all_results)
+        output_csv_path = "benchmark_report_classification.csv"
+        df.to_csv(output_csv_path, index=False)
+
+        print("\n" + "=" * 50)
+        print("FINAL BENCHMARK REPORT")
+        print("=" * 50)
+        print(df.to_string(index=False))
+        print(f"\nReport saved to {os.path.abspath(output_csv_path)}")
+    else:
+        print("\nNo results to report.")
 
 
 if __name__ == "__main__":

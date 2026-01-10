@@ -10,77 +10,108 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1.1}Dataset Creation}{2}{subsection.1.1.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{Video Acquisition}{2}{subsection.1.1.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{Automated Annotation (Teacher-Student Method)}{2}{subsection.1.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.2}Model Selection}{3}{subsection.1.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{YOLOv10}{3}{subsection.1.1.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces YOLOv10 Architecture}}{3}{figure.1.1}\protected@file@percent }
-\newlabel{fig:yolov10}{{1.1}{3}{YOLOv10 Architecture}{figure.1.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{RT-DETR}{4}{figure.1.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1.2}{\ignorespaces RT-DETR Architecture}}{4}{figure.1.2}\protected@file@percent }
-\newlabel{fig:rt-detr}{{1.2}{4}{RT-DETR Architecture}{figure.1.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.3}Training \& Evaluation}{4}{subsection.1.1.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1.3}{\ignorespaces YOLOv10 Training Loss}}{5}{figure.1.3}\protected@file@percent }
-\newlabel{fig:yolo_loss}{{1.3}{5}{YOLOv10 Training Loss}{figure.1.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Box Loss (CIoU Loss)}{5}{figure.1.3}\protected@file@percent }
-\newlabel{eq:ciou}{{1.1}{5}{Box Loss (CIoU Loss)}{equation.1.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Distribution Focal Loss (DFL)}{6}{equation.1.1}\protected@file@percent }
-\newlabel{eq:dfl}{{1.2}{6}{Distribution Focal Loss (DFL)}{equation.1.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{L1 Loss}{6}{equation.1.2}\protected@file@percent }
-\newlabel{eq:l1}{{1.3}{6}{L1 Loss}{equation.1.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{GIoU Loss}{6}{equation.1.3}\protected@file@percent }
-\newlabel{eq:giou}{{1.4}{6}{GIoU Loss}{equation.1.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.4}{\ignorespaces RT-DETR Training Loss}}{7}{figure.1.4}\protected@file@percent }
-\newlabel{fig:detr_loss}{{1.4}{7}{RT-DETR Training Loss}{figure.1.4}{}}
-\newlabel{eq:precision}{{1.5}{7}{GIoU Loss}{equation.1.5}{}}
-\newlabel{eq:recall}{{1.6}{7}{GIoU Loss}{equation.1.6}{}}
-\newlabel{eq:ap}{{1.7}{8}{GIoU Loss}{equation.1.7}{}}
-\newlabel{eq:mAP50}{{1.8}{8}{GIoU Loss}{equation.1.8}{}}
-\newlabel{eq:mAP50-95}{{1.9}{8}{GIoU Loss}{equation.1.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.5}{\ignorespaces Training Metrics Comparison}}{8}{figure.1.5}\protected@file@percent }
-\newlabel{fig:training_metrics}{{1.5}{8}{Training Metrics Comparison}{figure.1.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {1.2}Image Classification}{9}{section.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {2}Task 2: RAG Pipeline (LLM Task)}{10}{chapter.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces Samples of the Automatically Annotated Dataset (Mosaic View)}}{4}{figure.1.1}\protected@file@percent }
+\newlabel{fig:dataset_sample}{{1.1}{4}{Samples of the Automatically Annotated Dataset (Mosaic View)}{figure.1.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.2}Model Selection}{4}{subsection.1.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{YOLOv10}{5}{subsection.1.1.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1.2}{\ignorespaces YOLOv10 Architecture}}{5}{figure.1.2}\protected@file@percent }
+\newlabel{fig:yolov10}{{1.2}{5}{YOLOv10 Architecture}{figure.1.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{RT-DETR}{5}{figure.1.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1.3}{\ignorespaces RT-DETR Architecture}}{5}{figure.1.3}\protected@file@percent }
+\newlabel{fig:rt-detr}{{1.3}{5}{RT-DETR Architecture}{figure.1.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.3}Training \& Evaluation}{6}{subsection.1.1.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1.4}{\ignorespaces YOLOv10 Training Loss}}{6}{figure.1.4}\protected@file@percent }
+\newlabel{fig:yolo_loss}{{1.4}{6}{YOLOv10 Training Loss}{figure.1.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Box Loss (CIoU Loss)}{7}{figure.1.4}\protected@file@percent }
+\newlabel{eq:ciou}{{1.1}{7}{Box Loss (CIoU Loss)}{equation.1.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Distribution Focal Loss (DFL)}{7}{equation.1.1}\protected@file@percent }
+\newlabel{eq:dfl}{{1.2}{7}{Distribution Focal Loss (DFL)}{equation.1.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{L1 Loss}{7}{equation.1.2}\protected@file@percent }
+\newlabel{eq:l1}{{1.3}{7}{L1 Loss}{equation.1.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{GIoU Loss}{8}{equation.1.3}\protected@file@percent }
+\newlabel{eq:giou}{{1.4}{8}{GIoU Loss}{equation.1.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.5}{\ignorespaces RT-DETR Training Loss}}{8}{figure.1.5}\protected@file@percent }
+\newlabel{fig:detr_loss}{{1.5}{8}{RT-DETR Training Loss}{figure.1.5}{}}
+\newlabel{eq:precision}{{1.5}{9}{GIoU Loss}{equation.1.5}{}}
+\newlabel{eq:recall}{{1.6}{9}{GIoU Loss}{equation.1.6}{}}
+\newlabel{eq:ap}{{1.7}{9}{GIoU Loss}{equation.1.7}{}}
+\newlabel{eq:mAP50}{{1.8}{9}{GIoU Loss}{equation.1.8}{}}
+\newlabel{eq:mAP50-95}{{1.9}{9}{GIoU Loss}{equation.1.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.6}{\ignorespaces Training Metrics Comparison}}{10}{figure.1.6}\protected@file@percent }
+\newlabel{fig:training_metrics}{{1.6}{10}{Training Metrics Comparison}{figure.1.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.7}{\ignorespaces YOLOv10l Confusion Matrix}}{11}{figure.1.7}\protected@file@percent }
+\newlabel{fig:yolo_cm}{{1.7}{11}{YOLOv10l Confusion Matrix}{figure.1.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.8}{\ignorespaces RT-DETR-l Confusion Matrix}}{12}{figure.1.8}\protected@file@percent }
+\newlabel{fig:rtdetr_cm}{{1.8}{12}{RT-DETR-l Confusion Matrix}{figure.1.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.2}Image Classification}{12}{section.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.1}Dataset Creation}{12}{subsection.1.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Web Scraping}{12}{subsection.1.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Object Cropping (GroundingDINO)}{13}{subsection.1.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1.9}{\ignorespaces Cropping Pipeline}}{14}{figure.1.9}\protected@file@percent }
+\newlabel{fig:cropping_pipeline}{{1.9}{14}{Cropping Pipeline}{figure.1.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.10}{\ignorespaces Pickup Example: Raw vs. Cropped}}{15}{figure.1.10}\protected@file@percent }
+\newlabel{fig:pickup_sample}{{1.10}{15}{Pickup Example: Raw vs. Cropped}{figure.1.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.11}{\ignorespaces Truck Example: Raw vs. Cropped}}{15}{figure.1.11}\protected@file@percent }
+\newlabel{fig:truck_sample}{{1.11}{15}{Truck Example: Raw vs. Cropped}{figure.1.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.12}{\ignorespaces Bus Example: Raw vs. Cropped}}{15}{figure.1.12}\protected@file@percent }
+\newlabel{fig:bus_sample}{{1.12}{15}{Bus Example: Raw vs. Cropped}{figure.1.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.13}{\ignorespaces SUV Example: Raw vs. Cropped}}{16}{figure.1.13}\protected@file@percent }
+\newlabel{fig:suv_sample}{{1.13}{16}{SUV Example: Raw vs. Cropped}{figure.1.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.14}{\ignorespaces MPV Example: Raw vs. Cropped}}{16}{figure.1.14}\protected@file@percent }
+\newlabel{fig:mpv_sample}{{1.14}{16}{MPV Example: Raw vs. Cropped}{figure.1.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.2}Model Selection}{16}{subsection.1.2.2}\protected@file@percent }
+\newlabel{eq:arcface}{{1.10}{16}{Model Selection}{equation.1.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.3}Training \& Evaluation}{17}{subsection.1.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Experimental Setup}{17}{subsection.1.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Evaluation Strategy}{17}{subsection.1.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Results Analysis}{18}{Item.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1.1}{\ignorespaces Classification Model Benchmark}}{18}{table.1.1}\protected@file@percent }
+\newlabel{tab:classification_benchmark}{{1.1}{18}{Classification Model Benchmark}{table.1.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.15}{\ignorespaces Training Loss Comparison}}{19}{figure.1.15}\protected@file@percent }
+\newlabel{fig:train_loss}{{1.15}{19}{Training Loss Comparison}{figure.1.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.16}{\ignorespaces Validation Loss Comparison}}{19}{figure.1.16}\protected@file@percent }
+\newlabel{fig:val_loss}{{1.16}{19}{Validation Loss Comparison}{figure.1.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.17}{\ignorespaces EfficientNet-B3 Confusion Matrix}}{20}{figure.1.17}\protected@file@percent }
+\newlabel{fig:cm_eff}{{1.17}{20}{EfficientNet-B3 Confusion Matrix}{figure.1.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.18}{\ignorespaces Swin-Tiny Confusion Matrix}}{20}{figure.1.18}\protected@file@percent }
+\newlabel{fig:cm_swin}{{1.18}{20}{Swin-Tiny Confusion Matrix}{figure.1.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.19}{\ignorespaces Confusion Matrices on Test Set}}{20}{figure.1.19}\protected@file@percent }
+\newlabel{fig:confusion_matrices}{{1.19}{20}{Confusion Matrices on Test Set}{figure.1.19}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Task 2: RAG Pipeline (LLM Task)}{21}{chapter.2}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {2.1}RAG Pipeline}{10}{section.2.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces RAG Pipeline Flow}}{10}{figure.2.1}\protected@file@percent }
-\newlabel{fig:rag_pipeline}{{2.1}{10}{RAG Pipeline Flow}{figure.2.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Ingestion Phase}{11}{subsection.2.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Retrieval Phase}{11}{subsection.2.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}LLM Integration}{11}{section.2.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces LLM Integration with RAG}}{12}{figure.2.2}\protected@file@percent }
-\newlabel{fig:llm_integration}{{2.2}{12}{LLM Integration with RAG}{figure.2.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Guardrails Layer}{12}{subsection.2.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Tools \& RAG Layer}{13}{subsection.2.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Core Agent Layer}{13}{subsection.2.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.3}Experiments}{13}{section.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}RAG Pipeline}{13}{subsection.2.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{PII Related Queries}{14}{subsection.2.3.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces PII Related Queries Results}}{14}{table.2.1}\protected@file@percent }
-\newlabel{tab:pii_related_queries_result}{{2.1}{14}{PII Related Queries Results}{table.2.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{CVE Related Queries}{14}{table.2.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2.2}{\ignorespaces CVE Related Queries Results}}{14}{table.2.2}\protected@file@percent }
-\newlabel{tab:cve_related_queries_result}{{2.2}{14}{CVE Related Queries Results}{table.2.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{General Knowledge Queries}{14}{table.2.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2.3}{\ignorespaces General Knowledge Queries Results}}{15}{table.2.3}\protected@file@percent }
-\newlabel{tab:general_knowledge_queries_result}{{2.3}{15}{General Knowledge Queries Results}{table.2.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}LLM Integration}{15}{subsection.2.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{PII Related Queries}{15}{subsection.2.3.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2.4}{\ignorespaces PII Related Queries Results (LLM)}}{15}{table.2.4}\protected@file@percent }
-\newlabel{tab:pii_related_queries_llm_result}{{2.4}{15}{PII Related Queries Results (LLM)}{table.2.4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{CVE Related Queries}{16}{table.2.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2.5}{\ignorespaces CVE Related Queries Results (LLM)}}{16}{table.2.5}\protected@file@percent }
-\newlabel{tab:cve_related_queries_llm_result}{{2.5}{16}{CVE Related Queries Results (LLM)}{table.2.5}{}}
-\@writefile{toc}{\contentsline {subsubsection}{General Knowledge Queries}{16}{table.2.5}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2.6}{\ignorespaces General Knowledge Queries Results (LLM)}}{16}{table.2.6}\protected@file@percent }
-\newlabel{tab:general_knowledge_queries_llm_result}{{2.6}{16}{General Knowledge Queries Results (LLM)}{table.2.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}System Robustness Test from Prompt Injection}{16}{subsection.2.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Bonus Task: Adversarial Attacks}{17}{chapter.3}\protected@file@percent }
-\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Attack Methodology}{17}{section.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Robustness Results}{17}{section.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Conclusion}{18}{chapter.4}\protected@file@percent }
-\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}RAG Pipeline}{21}{section.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces RAG Pipeline Flow}}{21}{figure.2.1}\protected@file@percent }
+\newlabel{fig:rag_pipeline}{{2.1}{21}{RAG Pipeline Flow}{figure.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Ingestion Phase}{22}{subsection.2.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Retrieval Phase}{22}{subsection.2.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}LLM Integration}{22}{section.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces LLM Integration with RAG}}{23}{figure.2.2}\protected@file@percent }
+\newlabel{fig:llm_integration}{{2.2}{23}{LLM Integration with RAG}{figure.2.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Guardrails Layer}{23}{subsection.2.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Tools \& RAG Layer}{24}{subsection.2.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Core Agent Layer}{24}{subsection.2.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Experiments}{24}{section.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}RAG Pipeline}{24}{subsection.2.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{PII Related Queries}{25}{subsection.2.3.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces PII Related Queries Results}}{25}{table.2.1}\protected@file@percent }
+\newlabel{tab:pii_related_queries_result}{{2.1}{25}{PII Related Queries Results}{table.2.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{CVE Related Queries}{25}{table.2.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.2}{\ignorespaces CVE Related Queries Results}}{25}{table.2.2}\protected@file@percent }
+\newlabel{tab:cve_related_queries_result}{{2.2}{25}{CVE Related Queries Results}{table.2.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{General Knowledge Queries}{25}{table.2.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.3}{\ignorespaces General Knowledge Queries Results}}{26}{table.2.3}\protected@file@percent }
+\newlabel{tab:general_knowledge_queries_result}{{2.3}{26}{General Knowledge Queries Results}{table.2.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}LLM Integration}{26}{subsection.2.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{PII Related Queries}{26}{subsection.2.3.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.4}{\ignorespaces PII Related Queries Results (LLM)}}{26}{table.2.4}\protected@file@percent }
+\newlabel{tab:pii_related_queries_llm_result}{{2.4}{26}{PII Related Queries Results (LLM)}{table.2.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{CVE Related Queries}{27}{table.2.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.5}{\ignorespaces CVE Related Queries Results (LLM)}}{27}{table.2.5}\protected@file@percent }
+\newlabel{tab:cve_related_queries_llm_result}{{2.5}{27}{CVE Related Queries Results (LLM)}{table.2.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{General Knowledge Queries}{27}{table.2.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.6}{\ignorespaces General Knowledge Queries Results (LLM)}}{27}{table.2.6}\protected@file@percent }
+\newlabel{tab:general_knowledge_queries_llm_result}{{2.6}{27}{General Knowledge Queries Results (LLM)}{table.2.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}System Robustness Test from Prompt Injection}{27}{subsection.2.3.3}\protected@file@percent }
 \abx@aux@read@bbl@mdfivesum{E75D7E0DB03F09D45B25DF2F538BB294}
-\gdef \@abspage@last{19}
+\gdef \@abspage@last{28}

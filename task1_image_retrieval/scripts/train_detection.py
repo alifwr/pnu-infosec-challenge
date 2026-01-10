@@ -9,13 +9,13 @@ import wandb
 def train():
     # Define paths
     config_path = "configs/"
-    config_files = ["yolo10l.yaml", "yolo10x.yaml", "rtdetr-l.yaml", "rtdetr-x.yaml"]
+    config_files = ["rtdetr-x.yaml"]
     weights_path = "weights/"
-    weights_files = ["yolov10l.pt", "yolov10x.pt", "rtdetr-l.pt", "rtdetr-x.pt"]
+    weights_files = ["rtdetr-x.pt"]
     data_path = "dataset/yolo_vehicles/data.yaml"
     project_name = "vehicle_detection"
     run_name = "vehicles_yolo10x"
-
+0
     # Initialize wandb
     try:
         wandb.login()
