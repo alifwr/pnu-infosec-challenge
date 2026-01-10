@@ -1,0 +1,27 @@
+graph LR
+    subgraph S1 [Data Ingestion]
+        direction LR
+        A[Public CCTV<br/>YouTube] -->|download_youtube.py| B(Raw Videos)
+        note1[Criteria:<br/>1080p, H.264, MP4] -.- B
+        B -->|video_to_yolo.py| C{Sampling<br/>15 Frames}
+    end
+
+    subgraph S2 [Auto-Labelling]
+        direction LR
+        D[GroundingDINO<br/>Teacher] -->|Prompt: 'vehicle'| E{Detection}
+        E -->|Conf > 0.35<br/>Text > 0.25| F[Valid]
+    end
+
+    subgraph S3 [Processing & Output]
+        direction LR
+        G[Format<br/>(0)] --> H{Splitting}
+        H -->|80%| I[Train]
+        H -->|20%| J[Val]
+        I & J --> K[Student<br/>Models]
+    end
+
+    C --> D
+    F --> G
+
+    style A fill:#f9f,stroke:#333
+    style K fill:#bbf,stroke:#333
