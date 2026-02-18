@@ -25,8 +25,12 @@ This module implements a complete pipeline for analyzing vehicle traffic from vi
 ### Pipeline Overview
 
 1.  **Data Collection**:
-    *   `scripts/download_youtube.py`: Automatically downloads CCTV footage from YouTube.
-    *   `scripts/run_scraper.py`: Scrapes images of specific vehicle types (Pickup, Truck, Bus, SUV, MPV) for classification training.
+    *   `scripts/download_youtube.py <video_url>`: Automatically downloads CCTV footage from YouTube.
+        *   **Input**: YouTube video URL.
+        *   **Output**: Video file saved in the `downloads/` directory.
+    *   `scripts/run_scraper.py [config_path]`: Scrapes images of specific vehicle types (Pickup, Truck, Bus, SUV, MPV) for classification training.
+        *   **Input**: Optional path to a YAML configuration file (default: `configs/scraper_config.yaml`).
+        *   **Output**: Images saved in `data/indonesian_vehicles/images/` and metadata in `data/indonesian_vehicles/metadata.json`.
 2.  **Dataset Preparation**:
     *   `scripts/video_to_yolo.py`: Uses GroundingDINO to auto-annotate video frames for object detection (Teacher-Student approach).
     *   `scripts/run_cropping.py`: Uses GroundingDINO to crop vehicles from scraped images for the classification gallery.
